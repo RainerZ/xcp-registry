@@ -3,6 +3,8 @@
 // Registry for calibration segments, instances of parameters and measurement signals, type definitions and events
 // Standalone pure-Rust crate — no C/xcplib dependency
 
+#![forbid(unsafe_code)]
+
 // EPK calibration segment constants
 // Used by the A2L reader/writer to identify the XCPlite EPK segment
 pub(crate) const EPK_SEG_NAME: &str = "epk";

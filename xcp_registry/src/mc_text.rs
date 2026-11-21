@@ -201,16 +201,9 @@ impl From<McIdentifier> for String {
 // From String, &'static str
 //--------------------------
 
-fn to_identifier(s: &mut str) {
-    // Convert the string into a mutable byte slice
-    let bytes = unsafe { s.as_bytes_mut() };
-
-    for byte in bytes.iter_mut() {
-        // Check if the character is not alphanumeric or an underscore
-        if !byte.is_ascii_alphanumeric() && *byte != b'_' && *byte != b'.' {
-            *byte = b'_'; // Replace it with an underscore
-        }
-    }
+// Replace every byte which is not alphanumeric, an underscore or a dot with an underscore
+fn to_identifier(s: &str) -> String {
+    s.bytes().map(|b| if b.is_ascii_alphanumeric() || b == b'_' || b == b'.' { char::from(b) } else { '_' }).collect()
 }
 
 fn check_identifier(s: &str) -> bool {
@@ -229,8 +222,7 @@ fn check_identifier(s: &str) -> bool {
 impl From<String> for McIdentifier {
     fn from(s: String) -> Self {
         log::trace!("From<String> to McIdentifier: Leak String '{s}' to &'static str");
-        let mut s = s.clone();
-        to_identifier(&mut s);
+        let s = to_identifier(&s);
         let s = s.into_boxed_str();
         let s = Box::leak(s);
 

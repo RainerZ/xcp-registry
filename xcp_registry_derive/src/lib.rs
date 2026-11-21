@@ -8,6 +8,8 @@
 // The generated code emits fully-qualified `::xcp_registry::...` paths, so the consuming crate
 // must depend on `xcp_registry` directly. This crate does NOT depend on `xcp_registry`.
 
+#![forbid(unsafe_code)]
+
 use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
