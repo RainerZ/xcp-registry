@@ -1,5 +1,5 @@
 // Module mc_register_type
-// Runtime support for the `#[derive(McRegisterType)]` proc-macro (crate xcp_register_type_derive).
+// Runtime support for the `#[derive(McRegisterType)]` proc-macro (crate xcp_registry_derive).
 //
 // The derive generates an `impl McRegisterType for T` whose `register` method calls the
 // registry API directly (add_typedef / add_typedef_field / add_instance). No intermediate
@@ -55,7 +55,7 @@ impl McRegisterTarget {
 ///
 /// There is no runtime mode flag: the generated code always builds typedefs. Flattening for
 /// legacy tools is a separate, export-time transform on the populated registry, not a codegen
-/// mode (see `xcp_register_type_derive/DESIGN.md`).
+/// mode (see `xcp_registry_derive/DESIGN.md`).
 /// Internal type used by the generated code; not part of the stable public API.
 #[doc(hidden)]
 #[derive(Debug, Clone)]

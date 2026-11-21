@@ -78,13 +78,13 @@ pub use mc_register_type::McRegisterTarget;
 pub use mc_register_type::McRegisterType;
 
 // Re-export the derive macros (serde-style: one import brings the trait and the derive)
-pub use xcp_register_type_derive::McRegisterEnum;
-pub use xcp_register_type_derive::McRegisterType;
+pub use xcp_registry_derive::McRegisterEnum;
+pub use xcp_registry_derive::McRegisterType;
 
 //-----------------------------------------------------------------------------
 // Removed: the old RegisterFieldsTrait blanket impl that walked StructDescriptor /
 // FieldDescriptor trees. Registration is now generated directly by #[derive(McRegisterType)]
-// (see mc_register_type.rs and the xcp_register_type_derive crate).
+// (see mc_register_type.rs and the xcp_registry_derive crate).
 
 //----------------------------------------------------------------------------------------------
 // Error

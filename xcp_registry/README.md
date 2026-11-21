@@ -488,7 +488,7 @@ match registry.add_typedef("MyStruct", 16) {
 ## Derive macro (`McRegisterType`)
 
 In practice you rarely call the low-level API above directly.  
-The `#[derive(McRegisterType)]` proc-macro (crate `xcp_register_type_derive`) generates
+The `#[derive(McRegisterType)]` proc-macro (crate `xcp_registry_derive`) generates
 the necessary `add_typedef` / `add_typedef_field` / `add_instance` calls for a Rust struct.
 
 ### Minimal example

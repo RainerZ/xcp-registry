@@ -457,7 +457,7 @@ the mandatory proc-macro crate.
 ```
 xcp_registry/              # add McRegisterType trait + McRegisterContext (#[doc(hidden)]);
                            # depend on the derive crate and re-export it (serde-style)
-xcp_register_type_derive/  # proc-macro = true; ONLY the derive
+xcp_registry_derive/  # proc-macro = true; ONLY the derive
                            # deps: syn, quote, proc-macro2 (NOT xcp_registry)
 ```
 
@@ -482,7 +482,7 @@ Slightly less ergonomic for standalone `xcp_registry` users.
 
 ### 11.4 Naming
 
-- Keep **snake_case** crate names (`xcp_registry`, `xcp_register_type_derive`) — consistent
+- Keep **snake_case** crate names (`xcp_registry`, `xcp_registry_derive`) — consistent
   with the rest of the workspace. Note crates.io treats `-` and `_` as colliding for
   uniqueness; do not mix styles.
 - The `Mc*` type prefix with `xcp_*` crate prefix is the established pattern (`xcp_registry`

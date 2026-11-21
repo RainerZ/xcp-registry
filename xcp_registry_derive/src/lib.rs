@@ -1,4 +1,4 @@
-// Crate xcp_register_type_derive
+// Crate xcp_registry_derive
 //
 // Provides `#[derive(McRegisterType)]`. The derive generates an
 // `impl ::xcp_registry::McRegisterType for T` whose `register` method calls the registry API

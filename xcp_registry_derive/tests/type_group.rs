@@ -7,14 +7,14 @@ use xcp_registry::McRegisterType;
 
 macro_rules! define_struct {
     ($name:ident, $field:ident : $t:ty) => {
-        #[derive(xcp_register_type_derive::McRegisterType, Copy, Clone, Debug)]
+        #[derive(xcp_registry_derive::McRegisterType, Copy, Clone, Debug)]
         struct $name {
             $field: $t,
         }
     };
 }
 
-#[derive(xcp_register_type_derive::McRegisterType, Copy, Clone, Debug)]
+#[derive(xcp_registry_derive::McRegisterType, Copy, Clone, Debug)]
 struct Inner {
     a: u8,
 }

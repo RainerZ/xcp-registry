@@ -1,4 +1,4 @@
-# xcp_register_type_derive
+# xcp_registry_derive
 
 Proc-macro crate providing `#[derive(McRegisterType)]` and `#[derive(McRegisterEnum)]`.  
 
