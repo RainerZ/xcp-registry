@@ -107,6 +107,7 @@ impl std::fmt::Display for McObjectQualifier {
 /// Instances of type Characteristic may have references to Axis
 /// Not copy to inhibit that users unnecessary copy the data
 #[derive(Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McSupportData {
     pub object_type: McObjectType, // Measurement, Characteristic or Axis
 

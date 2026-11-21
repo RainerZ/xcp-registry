@@ -18,6 +18,7 @@ use super::RegistryError;
 
 // Type definition for McValueType::TypeDef(type_name)
 #[derive(Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McTypeDef {
     pub name: McIdentifier,
     pub fields: McTypeDefFieldList, // Fields of the struct type_name
@@ -115,6 +116,7 @@ impl<'a> IntoIterator for &'a McTypeDefList {
 // McTypeDefField
 
 #[derive(Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McTypeDefField {
     pub name: McIdentifier,
     pub dim_type: McDimType,            // Type name and matrix dimensions, recursion here if McValueType::TypeDef

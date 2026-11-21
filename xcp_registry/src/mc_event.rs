@@ -21,6 +21,7 @@ use super::McText;
 /// Events have unique id called id number
 /// The name is not unique, events with the same name may be created by multiple thread instances of a task, this is indicated by index > 0
 #[derive(Debug, Default, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McEvent {
     pub name: McIdentifier,        // Name of the event, not unique name
     pub index: u16,                // Instance index 1..n, 0 if single instance

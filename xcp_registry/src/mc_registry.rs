@@ -28,6 +28,7 @@ use super::flatten_registry;
 // Software version string identifier or EPK with address
 
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McApplicationVersion {
     pub epk: McText,
     pub epk_addr: u32,
@@ -50,6 +51,7 @@ impl Default for McApplicationVersion {
 
 /// Infos on the application
 #[derive(Debug, Default, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McApplication {
     pub app_id: u8,                    // Unique identifier for the application
     pub name: McIdentifier,            // Name of the application, used as A2L filename and module name
@@ -108,6 +110,7 @@ impl McApplication {
 
 /// Measurement and calibration object database
 #[derive(Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct Registry {
     // Flatten typedefs to measurement and calibration objects when writing A2L
     #[serde(skip_serializing)]

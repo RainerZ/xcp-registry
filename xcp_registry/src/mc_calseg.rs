@@ -21,6 +21,7 @@ use super::RegistryError;
 // Calibration parameters will never be changed by the application
 // The calibration tool is then able to modify contents of the calibration segment in a thread safe way
 #[derive(Debug, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McCalibrationSegment {
     pub name: McIdentifier, // Unique name of the calibration segment
     pub index: u16,         // Unique index of the calibration segment, used for relative addressing
@@ -94,6 +95,7 @@ impl McCalibrationSegment {
 // McCalibrationSegmentList
 
 #[derive(Debug, Default, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McCalibrationSegmentList(pub Vec<McCalibrationSegment>);
 
 impl Deref for McCalibrationSegmentList {

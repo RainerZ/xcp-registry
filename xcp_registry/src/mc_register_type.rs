@@ -60,6 +60,7 @@ impl McRegisterTarget {
 /// Internal type used by the generated code; not part of the stable public API.
 #[doc(hidden)]
 #[derive(Debug, Clone)]
+#[non_exhaustive]
 pub struct McRegisterContext {
     pub target: McRegisterTarget,
     pub instance_name: Option<&'static str>,

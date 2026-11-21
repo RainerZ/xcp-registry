@@ -124,6 +124,7 @@ pub enum RegistryError {
 // For A2l XCP IF_DATA
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McXcpTransportLayer {
     pub protocol_name: &'static str,
     pub addr: Option<Ipv4Addr>,
@@ -148,6 +149,7 @@ impl Default for McXcpTransportLayer {
 // For A2l XCP IF_DATA
 
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McXcpProtocolLayer {
     pub max_cto: u8,
     pub max_dto: u16,

@@ -18,6 +18,7 @@ use super::McText;
 /// May refer to axis objects
 /// May have a conversion rule
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McDimType {
     pub value_type: McValueType,
     #[serde(skip_serializing_if = "Option::is_none")]

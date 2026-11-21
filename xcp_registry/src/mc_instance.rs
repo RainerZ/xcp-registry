@@ -23,6 +23,7 @@ use serde::Serialize;
 
 /// Instance which may be a parameter, axis, or measurement value of complex type
 #[derive(Debug, Serialize, Deserialize)]
+#[non_exhaustive]
 pub struct McInstance {
     pub name: McIdentifier,
     pub dim_type: McDimType,            // Type, metadata and matrix dimensions, recursion here if McValueType::TypeDef
