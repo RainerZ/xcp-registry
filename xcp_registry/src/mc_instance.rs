@@ -248,7 +248,9 @@ impl McInstanceList {
         let name = name.into();
 
         log::debug!("Registry add_instance: {} dim_type={:?}  addr={}", name, dim_type, address);
-        assert!(mc_support_data.get_object_type() != McObjectType::Unspecified, "Object type must be specified");
+        if mc_support_data.get_object_type() == McObjectType::Unspecified {
+            return Err(RegistryError::ObjectTypeUnspecified(name.to_string()));
+        }
 
         // Error if duplicate in instance namespace (A2l characteristics, measurements, axis and instances)
         // Note that multiple instances of the same name are allowed if they have different event_id

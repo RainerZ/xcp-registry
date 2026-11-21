@@ -488,7 +488,6 @@ impl McSupportData {
     /// If there is no MC semantic description (mc_support_data), return McObjectType::Unspecified
     /// May be Measurement, Characteristic, Axis or Unspecified
     pub fn get_object_type(&self) -> McObjectType {
-        assert!(self.object_type != McObjectType::Unspecified);
         self.object_type
     }
 

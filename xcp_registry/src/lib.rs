@@ -111,6 +111,9 @@ pub enum RegistryError {
     #[error("registry error: index overflow")]
     IndexOverflow,
 
+    #[error("registry error: object type of `{0}` is unspecified")]
+    ObjectTypeUnspecified(String),
+
     #[error("unknown error")]
     Unknown,
 }
