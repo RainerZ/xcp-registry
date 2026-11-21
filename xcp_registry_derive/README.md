@@ -11,7 +11,7 @@ must list `xcp_registry` as a **direct dependency** in its `Cargo.toml`, also wh
 macros through a re-export of another crate such as `xcp_lite`. This crate itself does **not**
 depend on `xcp_registry` (no dependency cycle), it only emits paths as tokens.  
 
-See the design specification in [`DESIGN.md`](DESIGN.md) and examples in the `examples` folder.  
+See the design specification in [`DESIGN.md`](DESIGN.md). Examples are in the documentation of `xcp_registry`.  
 
 ## License
 
