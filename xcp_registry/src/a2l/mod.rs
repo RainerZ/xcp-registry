@@ -33,9 +33,9 @@ pub enum McA2mlMode {
 // the A2L file does not need to contain or include an A2ML description.
 // An /include "XCP_104.aml" in the A2L file requires the file to exist, a2lfile fails on any missing include file.
 #[cfg(feature = "a2l_reader")]
-fn load_a2l_file(path: &std::path::Path, strict: bool) -> Result<(a2lfile::A2lFile, Vec<a2lfile::A2lError>), String> {
+fn load_a2l_file(path: &std::path::Path, strict: bool) -> Result<(a2lfile::A2lFile, Vec<a2lfile::A2lError>), RegistryError> {
     let a2ml_spec = Some(aml_ifdata::A2MLVECTOR_TEXT.to_string());
-    a2lfile::load(path, a2ml_spec, strict).map_err(|e| format!("a2lfile::load failed: {}", e))
+    a2lfile::load(path, a2ml_spec, strict).map_err(|e| RegistryError::A2l(format!("a2lfile::load failed: {}", e)))
 }
 
 impl Registry {
@@ -46,7 +46,7 @@ impl Registry {
     /// Syntax and consistency check an A2L file
     /// IF_DATA XCP is checked with the built-in XCP A2ML specification, an A2ML description in the A2L file is not required
     #[cfg(feature = "a2l_reader")]
-    pub fn check_a2l<P: AsRef<std::path::Path>>(&self, path: &P) -> Result<u32, String> {
+    pub fn check_a2l<P: AsRef<std::path::Path>>(&self, path: &P) -> Result<u32, RegistryError> {
         // Read A2L file into A2lFile
         let res = load_a2l_file(path.as_ref(), true);
         match res {
@@ -85,7 +85,7 @@ impl Registry {
     /// flatten_typedefs - flatten nested typedefs to basic type instances with mangled names
     /// IF_DATA XCP is parsed with the built-in XCP A2ML specification, an A2ML description in the A2L file is not required
     #[cfg(feature = "a2l_reader")]
-    pub fn load_a2l<P: AsRef<std::path::Path>>(&mut self, path: &P, print_warnings: bool, strict: bool, check: bool, flatten_typedefs: bool) -> Result<u32, String> {
+    pub fn load_a2l<P: AsRef<std::path::Path>>(&mut self, path: &P, print_warnings: bool, strict: bool, check: bool, flatten_typedefs: bool) -> Result<u32, RegistryError> {
         //
         // Read A2L file from file into a2lfile::A2lFile data structure
         let res = load_a2l_file(path.as_ref(), strict);

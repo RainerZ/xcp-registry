@@ -18,7 +18,7 @@ use log::{debug, error, info, trace, warn};
 
 impl Registry {
     // Load (merge) the content of a a2lfile data structure into this registry
-    pub fn load_a2lfile(&mut self, a2l_file: &a2lfile::A2lFile) -> Result<(), String> {
+    pub(crate) fn load_a2lfile(&mut self, a2l_file: &a2lfile::A2lFile) -> Result<(), RegistryError> {
         registry_load_a2lfile(self, a2l_file)
     }
 }
@@ -332,7 +332,7 @@ fn update_typedef_field(
     }
 }
 
-fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -> Result<(), String> {
+fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -> Result<(), RegistryError> {
     let mut relative_segment_addressing: bool = false; // Predefined conversion BOOL, IDENTITY, address format conversion
     let mut convert_a2l_address: bool = false; // Convert A2L address to calseg_rel or event_rel/dyn/abs if possible
 
@@ -342,7 +342,7 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
         debug!("  AML Version: {:?}", a2l_file.a2ml_version);
     } else {
         error!("A2l Version not found");
-        return Err("A2l Version not found".to_string());
+        return Err(RegistryError::A2l("A2l Version not found".to_string()));
     }
     debug!("  Projectname: {}", a2l_file.project.name);
     debug!("  Project description: {}", a2l_file.project.long_identifier);

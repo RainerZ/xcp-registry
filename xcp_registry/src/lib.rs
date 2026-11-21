@@ -114,6 +114,9 @@ pub enum RegistryError {
     #[error("registry error: object type of `{0}` is unspecified")]
     ObjectTypeUnspecified(String),
 
+    #[error("A2L error: {0}")]
+    A2l(String),
+
     #[error("unknown error")]
     Unknown,
 }
