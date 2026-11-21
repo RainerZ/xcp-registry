@@ -91,6 +91,7 @@ pub use xcp_registry_derive::McRegisterType;
 
 /// Error type returned by functions of the registry API
 #[derive(Error, Debug)]
+#[non_exhaustive]
 pub enum RegistryError {
     #[error("io error")]
     Io(#[from] std::io::Error),

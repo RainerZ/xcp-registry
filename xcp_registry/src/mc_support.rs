@@ -14,6 +14,7 @@ use super::McValueType;
 
 /// Object type Measurement, Characteristic or Axis instances or typedefs
 #[derive(Debug, Default, Clone, Copy, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub enum McObjectType {
     #[default]
     Unspecified = 0,
@@ -76,6 +77,7 @@ impl std::fmt::Display for McObjectType {
 // @@@@ TODO: How to specify ReadWrite non volatile objects? DefuThis is a special case for characteristics and axis objects, which are constant in the target ECU, but may be modified by a calibration tool. This is a special case of interior mutability, which is not supported by Rust. The calibration concept needs to be specified in the XCP protocol and the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file. The calibration concept is not part of the XCP protocol, but is part of the A2L file.
 /// Object qualifier for Measurement, Characteristic or Axis object type instances or typedefs
 #[derive(Debug, Default, Clone, Copy, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub enum McObjectQualifier {
     #[default]
     Default = 0,

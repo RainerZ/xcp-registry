@@ -104,6 +104,7 @@ impl std::fmt::Display for McDimType {
 /// Special case is Blob, which functionality might ve realized in some other way in future
 /// McValueType is copy
 #[derive(Debug, Copy, Clone, PartialEq, Serialize, Deserialize)]
+#[non_exhaustive]
 pub enum McValueType {
     Unknown,
     Bool,

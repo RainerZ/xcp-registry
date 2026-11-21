@@ -20,6 +20,7 @@ use super::McValueType;
 /// Internal type used by the generated code; not part of the stable public API.
 #[doc(hidden)]
 #[derive(Debug, Clone, Copy)]
+#[non_exhaustive]
 pub enum McRegisterTarget {
     /// Calibration-segment-relative addressing.
     CalSeg(&'static str),

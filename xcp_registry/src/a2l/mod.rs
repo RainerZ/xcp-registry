@@ -15,6 +15,7 @@ use super::*;
 
 /// How the XCP A2ML description is written into an A2L file
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+#[non_exhaustive]
 pub enum McA2mlMode {
     /// Write `/include "XCP_104.aml"`, the file XCP_104.aml must be provided next to the A2L file (default, keeps the A2L file small)
     #[default]
