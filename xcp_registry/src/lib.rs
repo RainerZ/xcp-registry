@@ -183,23 +183,40 @@ pub fn init() {
     }
 }
 
+/// Lock guard for the mutable registry singleton, returned by [`get_lock`]
+/// Dereferences to `Option<Registry>`, which is `None` when the registry is closed
+pub struct RegistryGuard(parking_lot::MutexGuard<'static, Option<Registry>>);
+
+impl std::ops::Deref for RegistryGuard {
+    type Target = Option<Registry>;
+    fn deref(&self) -> &Self::Target {
+        &self.0
+    }
+}
+
+impl std::ops::DerefMut for RegistryGuard {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.0
+    }
+}
+
 /// Get a lock on the mutable registry singleton
 /// # Panics
 /// If the registry is not initialized with registry::init
 /// # Returns
 /// None if the registry is closed
-pub fn get_lock() -> parking_lot::lock_api::MutexGuard<'static, parking_lot::RawMutex, Option<Registry>> {
+pub fn get_lock() -> RegistryGuard {
     // Check if registry is closed, it should be None then
     #[cfg(not(test))]
     if CLOSED_REGISTRY.lock().is_some() {
         let l = REGISTRY.lock();
         assert!(l.is_none());
-        return l;
+        return RegistryGuard(l);
     }
 
     let l = REGISTRY.lock();
     assert!(l.is_some(), "Registry not initialized!");
-    l
+    RegistryGuard(l)
 }
 
 /// Get a reference to the closed registry singleton
