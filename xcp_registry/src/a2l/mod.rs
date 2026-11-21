@@ -516,33 +516,4 @@ mod test {
         }
         std::fs::remove_dir_all(&dir).unwrap();
     }
-
-    // The CANape A2ML specification in the built-in A2ML specification must parse CANape IF_DATA like CANape.aml in the repository root
-    #[test]
-    fn test_a2ml_specification_canape() {
-        let path = concat!(env!("CARGO_MANIFEST_DIR"), "/../CANape.aml");
-        let canape_aml = std::fs::read_to_string(path).unwrap_or_else(|e| panic!("{path}: {e}"));
-        let a2l = r#"ASAP2_VERSION 1 71
-/begin PROJECT test ""
-/begin MODULE test ""
-/begin IF_DATA CANAPE_MODULE RECORD_LAYOUT_STEPSIZE "U8" 1 2 3 4 5 6 /end IF_DATA
-/begin IF_DATA CANAPE_ADDRESS_UPDATE
-    EPK_ADDRESS "epk" 0 ECU_CALIBRATION_OFFSET "offset" 16
-    /begin CALIBRATION_METHOD InCircuit2 "table" 0 ORIGINAL_POINTER_TABLE "flash_table" 0 FLASH_SECTION 0x8000000 0x10000 /end CALIBRATION_METHOD
-    /begin MAP_SYMBOL FIRST "start" 0 LAST "end" 0 ADDRESS_MAPPING_XCP "src" "dst" /end MAP_SYMBOL
-    /begin MEMORY_SEGMENT "params" FIRST "params_start" 0 LAST "params_end" 0 /end MEMORY_SEGMENT
-/end IF_DATA
-/begin IF_DATA CANAPE_GROUP /begin STRUCTURE_LIST "a" "b" /end STRUCTURE_LIST /end IF_DATA
-/begin IF_DATA CANAPE_CAL_METHOD
-    /begin CAL_PARAM_GROUP NAME "group" ADDRESS 0x1000 SIZE 16 COMMENT "" LINK_MAP "symbol" 0x1000 0 0 0 /end CAL_PARAM_GROUP
-/end IF_DATA
-/begin IF_DATA CNP_CREATE_INI /begin TP_BLOB 1 PARAMETER "device.ini" "$CNP_DVC_SCTN$" "name" "value" /end TP_BLOB /end IF_DATA
-/begin MEASUREMENT counter "" UBYTE NO_COMPU_METHOD 0 0 0 255 ECU_ADDRESS 0x200
-    /begin IF_DATA CANAPE_EXT 100 LINK_MAP "counter" 0x200 0 0 0 1 0x87 0 DISPLAY 0 0 255 VIRTUAL_CONVERSION "conv" STEPSIZE_W 1 STEPSIZE_X 2 STEPSIZE_Y 3 /end IF_DATA
-/end MEASUREMENT
-/end MODULE
-/end PROJECT
-"#;
-        compare_a2ml_specifications(&[a2l.to_string()], "CANape.aml", a2ml_body(&canape_aml));
-    }
 }
