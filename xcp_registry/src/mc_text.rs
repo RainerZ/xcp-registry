@@ -240,9 +240,12 @@ impl From<String> for McIdentifier {
 
 impl From<&'static str> for McIdentifier {
     fn from(s: &'static str) -> Self {
-        assert!(check_identifier(s));
-
-        McIdentifier(s)
+        if check_identifier(s) {
+            McIdentifier(s)
+        } else {
+            // Replace invalid characters like From<String> does, this needs a leaked copy
+            McIdentifier::from(s.to_string())
+        }
     }
 }
 
@@ -326,11 +329,9 @@ mod mc_text_tests {
         let t: McIdentifier = "Identifier".into();
         assert_eq!(t, "Identifier");
 
-        let result = std::panic::catch_unwind(|| {
-            // Creating McIdentifier with invalid characters
-            let _ = McIdentifier::new("Illegal Identifier");
-        });
-        assert!(result.is_err()); // Check 
+        // A literal with invalid characters is sanitized like a String
+        let t3 = McIdentifier::new("Illegal Identifier");
+        assert_eq!(t3.as_str(), "Illegal_Identifier");
 
         let s1 = McIdentifier::from("&Legal .Identifier ".to_string());
         assert_eq!(s1.as_str(), "_Legal_.Identifier_");
