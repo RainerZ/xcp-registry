@@ -416,7 +416,6 @@ mod mc_address_tests {
     use super::*;
 
     #[test]
-    #[ignore = "temporary disabled"]
     fn test_mc_address() {
         let mut reg = Registry::new();
         reg.cal_seg_list.add_a2l_cal_seg("calseg", 0, None, 0, 0x80000000, 0x1000).unwrap();
@@ -436,8 +435,8 @@ mod mc_address_tests {
             assert_eq!(addr.get_addr_offset(), -1);
             let a = addr.get_a2l_addr(&reg);
             assert!(a.0 == McAddress::XCP_ADDR_EXT_DYN);
-            //assert_eq!(a.1, 0x0002FFFF); // XCPlite < V1.2
-            assert_eq!(a.1, 2 << McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS | (0x003FFFFF));
+            // The offset is stored with XCP_ADDR_EXT_DYN_OFFSET_OFFSET added, so -1 becomes 0xFFFF
+            assert_eq!(a.1, 2 << McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS | 0xFFFF);
 
             let addr = McAddress::new_event_dyn(0, 2, 0x7FFF);
             assert_eq!(addr.get_calseg_name(), None);
@@ -445,8 +444,7 @@ mod mc_address_tests {
             assert_eq!(addr.get_addr_offset(), 0x7FFF);
             let a = addr.get_a2l_addr(&reg);
             assert!(a.0 == McAddress::XCP_ADDR_EXT_DYN);
-            // assert_eq!(a.1, 0x00027FFF); // XCPlite < V1.2
-            assert_eq!(a.1, 2 << McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS | (0x003FFFFF & 0x7FFF));
+            assert_eq!(a.1, 2 << McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS | 0x17FFF);
         }
     }
 }
