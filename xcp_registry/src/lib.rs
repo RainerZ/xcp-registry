@@ -7,11 +7,11 @@
 // Used by the A2L reader/writer to identify the XCPlite EPK segment
 pub(crate) const EPK_SEG_NAME: &str = "epk";
 
-use parking_lot::Mutex;
 use serde::Deserialize;
 use serde::Serialize;
 use std::collections::HashMap;
 use std::net::Ipv4Addr;
+use std::sync::{Mutex, MutexGuard, PoisonError};
 use thiserror::Error;
 
 // Registry
@@ -163,18 +163,22 @@ impl Default for McXcpProtocolLayer {
 /// Registry is closed when None
 static REGISTRY: Mutex<Option<Registry>> = Mutex::new(None);
 
-// @@@@ TODO: Check if this AI induced change from OnceLock to Mutex is what we desired ??????
 /// Closed registry singleton
 /// (Finalized and read only after call to `Registry::close()`)
+// A Mutex, not a OnceLock, because `registry_test::test_reinit()` must be able to reset it
 static CLOSED_REGISTRY: Mutex<Option<&'static Registry>> = Mutex::new(None);
-//static CLOSED_REGISTRY: std::sync::OnceLock<Registry> = std::sync::OnceLock::new();
+
+// Lock a singleton mutex, ignoring poisoning (a panic in another thread while it held the lock)
+fn lock<T>(m: &'static Mutex<T>) -> MutexGuard<'static, T> {
+    m.lock().unwrap_or_else(PoisonError::into_inner)
+}
 
 //---------------------------------------------------------------------------------------------------------
 // Associated function for the registry singleton
 
 /// Initialize the mutable registry singleton
 pub fn init() {
-    let mut l = REGISTRY.lock();
+    let mut l = lock(&REGISTRY);
     if l.is_none() {
         *l = Some(Registry::new());
         log::info!("Registry initialized");
@@ -185,7 +189,7 @@ pub fn init() {
 
 /// Lock guard for the mutable registry singleton, returned by [`get_lock`]
 /// Dereferences to `Option<Registry>`, which is `None` when the registry is closed
-pub struct RegistryGuard(parking_lot::MutexGuard<'static, Option<Registry>>);
+pub struct RegistryGuard(MutexGuard<'static, Option<Registry>>);
 
 impl std::ops::Deref for RegistryGuard {
     type Target = Option<Registry>;
@@ -208,13 +212,13 @@ impl std::ops::DerefMut for RegistryGuard {
 pub fn get_lock() -> RegistryGuard {
     // Check if registry is closed, it should be None then
     #[cfg(not(test))]
-    if CLOSED_REGISTRY.lock().is_some() {
-        let l = REGISTRY.lock();
+    if lock(&CLOSED_REGISTRY).is_some() {
+        let l = lock(&REGISTRY);
         assert!(l.is_none());
         return RegistryGuard(l);
     }
 
-    let l = REGISTRY.lock();
+    let l = lock(&REGISTRY);
     assert!(l.is_some(), "Registry not initialized!");
     RegistryGuard(l)
 }
@@ -222,18 +226,18 @@ pub fn get_lock() -> RegistryGuard {
 /// Get a reference to the closed registry singleton
 /// Close and flatten if not already closed
 pub fn get() -> &'static Registry {
-    if CLOSED_REGISTRY.lock().is_none() {
+    if lock(&CLOSED_REGISTRY).is_none() {
         // Close the mutable registry singleton
         // Flatten typedefs
         log::warn!("Automatically close registry - call to Registry::get() without explictic close!");
         close();
     }
-    CLOSED_REGISTRY.lock().unwrap()
+    lock(&CLOSED_REGISTRY).unwrap()
 }
 
 /// Get closed status   
 pub fn is_closed() -> bool {
-    CLOSED_REGISTRY.lock().is_some()
+    lock(&CLOSED_REGISTRY).is_some()
 }
 
 /// Close registry
@@ -256,7 +260,7 @@ pub fn close() {
     }
 
     // Move mutable registry singleton to closed singleton
-    *CLOSED_REGISTRY.lock() = Some(Box::leak(Box::new(reg)));
+    *lock(&CLOSED_REGISTRY) = Some(Box::leak(Box::new(reg)));
     // CLOSED_REGISTRY.get().unwrap()
 
     // log::info!("Registry instance list:");
@@ -400,8 +404,8 @@ pub mod registry_test {
     use super::*;
 
     pub fn test_reinit() {
-        *REGISTRY.lock() = Some(Registry::new());
-        *CLOSED_REGISTRY.lock() = None;
+        *lock(&REGISTRY) = Some(Registry::new());
+        *lock(&CLOSED_REGISTRY) = None;
     }
 }
 

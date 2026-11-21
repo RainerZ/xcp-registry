@@ -30,9 +30,6 @@ thiserror = "2.0.21"
 # Logging
 log = "0.4.35"
 
-# More compact and efficient implementations of the standard synchronization primitives
-parking_lot = "0.12.5"
-
 # Regular expression matching for registry object search
 regex = "1.13.1"
 
