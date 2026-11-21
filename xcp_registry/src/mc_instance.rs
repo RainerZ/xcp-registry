@@ -218,7 +218,7 @@ impl McInstanceList {
     }
 
     pub fn sort_by_name(&mut self) {
-        self.0.sort_by(|a, b| a.name.cmp(&b.name));
+        self.0.sort_by_key(|a| a.name);
     }
 
     pub fn sort_by_name_and_event(&mut self) {

@@ -138,7 +138,9 @@ fn get_enum_unit(compu_method: &a2lfile::CompuMethod, module: &a2lfile::Module) 
         if !unit.is_empty() {
             unit.push(' ');
         }
-        unit.push_str(&format!(r#"{} "{}""#, pair.in_val as i64, pair.out_val));
+        #[allow(clippy::cast_possible_truncation)] // in_val is integral and within +-2^53, checked above
+        let in_val = pair.in_val as i64;
+        unit.push_str(&format!(r#"{} "{}""#, in_val, pair.out_val));
     }
     Some(unit)
 }
@@ -422,8 +424,11 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
         // Memory segments
         // @@@@ TODO: IF_DATA XCP not taken into accounts
         // We assume here, that calibration segments are implicitly numbered
-        let mut number: u8 = 0;
-        for m in mod_par.memory_segment.iter() {
+        for (number, m) in mod_par.memory_segment.iter().enumerate() {
+            let Ok(number) = u8::try_from(number) else {
+                warn!("More than 256 memory segments, remaining segments skipped");
+                break;
+            };
             let name = m.get_name().to_string();
             let addr_ext = 0; // @@@@ xcp-lite address extensions hardcoded here, CANape supports only 0, should be be in IF_DATA
             let addr = m.address;
@@ -444,8 +449,6 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
                     warn!("Failed to add calibration segment: {}", e);
                 }
             }
-
-            number += 1;
         }
     }
 
@@ -505,10 +508,14 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
 
         // Address
         let event_id = get_event_id_from_ifdata(&characteristic.if_data);
-        if event_id.is_some() {
-            info!("Characteristic {} has event id {}", name, event_id.unwrap());
+        if let Some(event_id) = event_id {
+            info!("Characteristic {} has event id {}", name, event_id);
         }
-        let addr_ext = characteristic.ecu_address_extension.as_ref().map(|a| a.extension).unwrap_or(0) as u8;
+        let addr_ext = characteristic.ecu_address_extension.as_ref().map(|a| a.extension).unwrap_or(0);
+        let Ok(addr_ext) = u8::try_from(addr_ext) else {
+            warn!("Characteristic {} skipped, address extension {} out of range", name, addr_ext);
+            continue;
+        };
         let addr = characteristic.address;
         let address = new_mc_address_from_a2l(registry, addr, addr_ext, event_id, convert_a2l_address);
 
@@ -572,10 +579,10 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
             warn!("Measurement {} has no event id", name);
         }
         let addr = if let Some(a) = measurement.ecu_address.as_ref() { a.address } else { 0 };
-        let addr_ext = if let Some(addr_ext) = &measurement.ecu_address_extension {
-            addr_ext.extension as u8
-        } else {
-            0
+        let addr_ext = measurement.ecu_address_extension.as_ref().map(|a| a.extension).unwrap_or(0);
+        let Ok(addr_ext) = u8::try_from(addr_ext) else {
+            warn!("Measurement {} skipped, address extension {} out of range", name, addr_ext);
+            continue;
         };
         let address = new_mc_address_from_a2l(registry, addr, addr_ext, event_id, convert_a2l_address);
 
@@ -586,8 +593,8 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
         let unique_name =
          // Check if there is already an instance with the same name
         if registry.instance_list.get_instance(&name,object_type,None).is_some() {
-            if event_id.is_some() {
-                if let Some(event) = registry.event_list.find_event_id(event_id.unwrap()) {
+            if let Some(event_id) = event_id {
+                if let Some(event) = registry.event_list.find_event_id(event_id) {
                     warn!("Measurement instance name '{}' is not unique, using event name '{}' as prefix", name, event.name);
                     format!("{}.{}", event.name, name)
                 } else {
@@ -640,7 +647,10 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
             let (x_dim, y_dim) = get_matrix_dim(matrix_dim.as_ref());
 
             // Add typedef field
-            let offset = field.address_offset as u16;
+            let Ok(offset) = u16::try_from(field.address_offset) else {
+                warn!("Typedef field {}.{} skipped, offset {} out of range", typedef_name, field_name, field.address_offset);
+                continue;
+            };
             let value_type = McValueType::TypeDef(field.component_type.clone().into());
             let mc_support_data = McSupportData::new(McObjectType::Unspecified);
             let dim_type = McDimType::new(value_type, x_dim, y_dim);
@@ -753,10 +763,10 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
 
         // Address
         let addr = instance.start_address;
-        let addr_ext = if let Some(addr_ext) = &instance.ecu_address_extension {
-            addr_ext.extension as u8
-        } else {
-            0
+        let addr_ext = instance.ecu_address_extension.as_ref().map(|a| a.extension).unwrap_or(0);
+        let Ok(addr_ext) = u8::try_from(addr_ext) else {
+            warn!("Instance {} skipped, address extension {} out of range", name, addr_ext);
+            continue;
         };
         let address = new_mc_address_from_a2l(registry, addr, addr_ext, event_id, convert_a2l_address);
 

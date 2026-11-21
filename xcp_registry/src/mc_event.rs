@@ -129,11 +129,11 @@ impl McEventList {
     }
 
     pub fn sort_by_name(&mut self) {
-        self.0.sort_by(|a, b| a.name.cmp(&b.name));
+        self.0.sort_by_key(|a| a.name);
     }
 
     pub fn sort_by_id(&mut self) {
-        self.0.sort_by(|a, b| a.id.cmp(&b.id));
+        self.0.sort_by_key(|a| a.id);
     }
 
     /// Find an event by name

@@ -690,8 +690,8 @@ impl McInstance {
                 if !unit.is_empty() {
                     write!(writer, r#" PHYS_UNIT "{}""#, unit)?;
                 }
-                if step.is_some() {
-                    write!(writer, r#" STEP_SIZE {}"#, step.unwrap())?;
+                if let Some(step) = step {
+                    write!(writer, r#" STEP_SIZE {}"#, step)?;
                 }
                 write_axis_descr(name, dim_type, mc_support_data, writer)?;
                 if ext != 0 {
@@ -719,8 +719,8 @@ impl McInstance {
                 if !unit.is_empty() {
                     write!(writer, r#" PHYS_UNIT "{unit}""#)?;
                 }
-                if step.is_some() {
-                    write!(writer, r#" STEP_SIZE {}"#, step.unwrap())?;
+                if let Some(step) = step {
+                    write!(writer, r#" STEP_SIZE {}"#, step)?;
                 }
                 write_dimensions(dim_type, writer)?;
                 if let Some(id) = event_id {
@@ -765,8 +765,8 @@ impl McInstance {
         )?;
         write!(writer, r#" {}"#, min)?;
         write!(writer, r#" {}"#, max)?;
-        if step.is_some() {
-            write!(writer, r#" STEP_SIZE {}"#, step.unwrap())?;
+        if let Some(step) = step {
+            write!(writer, r#" STEP_SIZE {}"#, step)?;
         }
         if !unit.is_empty() {
             write!(writer, r#" PHYS_UNIT "{}""#, unit)?;
@@ -835,8 +835,8 @@ impl McInstance {
                 write!(writer, r#" PHYS_UNIT "{}""#, unit)?;
             }
 
-            if step.is_some() {
-                write!(writer, r#" STEP_SIZE {}"#, step.unwrap())?;
+            if let Some(step) = step {
+                write!(writer, r#" STEP_SIZE {}"#, step)?;
             }
             if ext != 0 {
                 write!(writer, " ECU_ADDRESS_EXTENSION {}", ext)?;

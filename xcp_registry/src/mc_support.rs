@@ -206,41 +206,41 @@ impl std::fmt::Display for McSupportData {
         if self.qualifier != McObjectQualifier::Default {
             write!(f, " {:?}", self.qualifier)?;
         }
-        if self.factor.is_some() {
-            write!(f, " factor={}", self.factor.unwrap())?;
+        if let Some(v) = self.factor {
+            write!(f, " factor={}", v)?;
         }
-        if self.offset.is_some() {
-            write!(f, " offset={}", self.offset.unwrap())?;
+        if let Some(v) = self.offset {
+            write!(f, " offset={}", v)?;
         }
         if !self.unit.is_empty() {
             write!(f, " unit={}", self.unit)?;
         }
-        if self.min.is_some() {
-            write!(f, " min={}", self.min.unwrap())?;
+        if let Some(v) = self.min {
+            write!(f, " min={}", v)?;
         }
-        if self.max.is_some() {
-            write!(f, " max={}", self.max.unwrap())?;
+        if let Some(v) = self.max {
+            write!(f, " max={}", v)?;
         }
-        if self.step.is_some() {
-            write!(f, " step={}", self.step.unwrap())?;
+        if let Some(v) = self.step {
+            write!(f, " step={}", v)?;
         }
-        if self.x_axis_ref.is_some() {
-            write!(f, " x_axis_ref={}", self.x_axis_ref.as_ref().unwrap())?;
+        if let Some(v) = self.x_axis_ref.as_ref() {
+            write!(f, " x_axis_ref={}", v)?;
         }
-        if self.y_axis_ref.is_some() {
-            write!(f, " y_axis_ref={}", self.y_axis_ref.as_ref().unwrap())?;
+        if let Some(v) = self.y_axis_ref.as_ref() {
+            write!(f, " y_axis_ref={}", v)?;
         }
-        if self.x_axis_input_quantity.is_some() {
-            write!(f, " x_axis_input_quantity={}", self.x_axis_input_quantity.as_ref().unwrap())?;
+        if let Some(v) = self.x_axis_input_quantity.as_ref() {
+            write!(f, " x_axis_input_quantity={}", v)?;
         }
-        if self.y_axis_input_quantity.is_some() {
-            write!(f, " y_axis_input_quantity={}", self.y_axis_input_quantity.as_ref().unwrap())?;
+        if let Some(v) = self.y_axis_input_quantity.as_ref() {
+            write!(f, " y_axis_input_quantity={}", v)?;
         }
-        if self.x_axis_conv.is_some() {
-            write!(f, " x_axis_conv={}", self.x_axis_conv.as_ref().unwrap())?;
+        if let Some(v) = self.x_axis_conv.as_ref() {
+            write!(f, " x_axis_conv={}", v)?;
         }
-        if self.y_axis_conv.is_some() {
-            write!(f, " y_axis_conv={}", self.y_axis_conv.as_ref().unwrap())?;
+        if let Some(v) = self.y_axis_conv.as_ref() {
+            write!(f, " y_axis_conv={}", v)?;
         }
 
         if !self.comment.is_empty() {
