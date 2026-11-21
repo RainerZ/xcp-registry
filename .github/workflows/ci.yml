@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust stable
+        run: rustup toolchain install stable --profile minimal --no-self-update && rustup default stable
+      - name: Test without features
+        run: cargo test --workspace --locked
+      - name: Test with a2l_reader
+        run: cargo test --workspace --locked --features xcp_registry/a2l_reader
+
+  lint:
+    name: Format, clippy, documentation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust stable
+        run: rustup toolchain install stable --profile minimal --component rustfmt --component clippy --no-self-update && rustup default stable
+      - name: Format
+        run: cargo fmt --all -- --check
+      - name: Clippy without features
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Clippy with all features
+        run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - name: Documentation
+        run: cargo doc --workspace --no-deps --all-features --locked
+        env:
+          RUSTDOCFLAGS: -D warnings
+
+  msrv:
+    # The version declared as rust-version in Cargo.toml
+    name: Rust 1.90
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust 1.90
+        run: rustup toolchain install 1.90 --profile minimal --no-self-update && rustup default 1.90
+      - name: Test without features
+        run: cargo test --workspace --locked
+      - name: Test with a2l_reader
+        run: cargo test --workspace --locked --features xcp_registry/a2l_reader
+
+  package:
+    name: Publish dry run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install Rust stable
+        run: rustup toolchain install stable --profile minimal --no-self-update && rustup default stable
+      - name: Publish dry run
+        run: cargo publish --dry-run --locked -p xcp_registry_derive -p xcp_registry
