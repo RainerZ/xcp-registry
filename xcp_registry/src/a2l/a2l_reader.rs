@@ -242,10 +242,10 @@ fn new_mc_address_from_a2l(_registry: &Registry, addr: u32, addr_ext: u8, event_
             McAddress::new_a2l(addr, addr_ext)
         }
     } else {
+        unimplemented!(
+            "Address conversion from A2L to calseg_rel, event_rel/dyn/abs not implemented yet, this is highly dependent on the specific address encoding scheme used in the A2L file, currently only raw A2L address representation is supported"
+        );
 
-        unimplemented!("Address conversion from A2L to calseg_rel, event_rel/dyn/abs not implemented yet, this is highly dependent on the specific address encoding scheme used in the A2L file, currently only raw A2L address representation is supported");
-       
-       
         // Assume address has XCPlite address encoding for segment and relative addressing modes
         // match addr_ext {
         //     McAddress::XCP_ADDR_EXT_SEG => {
@@ -268,7 +268,7 @@ fn new_mc_address_from_a2l(_registry: &Registry, addr: u32, addr_ext: u8, event_
         //         // Sign extend to i32
         //         let addr_offset: i32 = ((addr << (32 - McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS)) as i32) >> (32 - McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS);
         //         assert_eq!(event_id, (addr >> McAddress::XCP_ADDR_EXT_DYN_OFFSET_BITS) as u16);
-        //         assert!(addr_ext >= McAddress::XCP_ADDR_EXT_DYN && addr_ext < McAddress::XCP_ADDR_EXT_DYN + 14, "Address extension {} not supported in xcp-lite mode", addr_ext);  
+        //         assert!(addr_ext >= McAddress::XCP_ADDR_EXT_DYN && addr_ext < McAddress::XCP_ADDR_EXT_DYN + 14, "Address extension {} not supported in xcp-lite mode", addr_ext);
         //         McAddress::new_event_dyn(addr_ext-McAddress::XCP_ADDR_EXT_DYN, event_id, addr_offset)
         //     }
         // }
@@ -364,7 +364,7 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
                     info!("XCPlite A2L detected, {} addressing mode", project_no.project_number);
                 } else if project_no.project_number == "XCPLITE__CASDD" {
                     relative_segment_addressing = true; // We assume calibration segments always have segment addressing mode
-                    // @@@@ Removed: Newer versions of XCPlite may use different address encoding schemes, leave the A2L address as 
+                    // @@@@ Removed: Newer versions of XCPlite may use different address encoding schemes, leave the A2L address as
                     // convert_a2l_address = true; // Convert A2L address
                     convert_a2l_address = false; // Don't convert A2L address, use raw A2L address representation
                     info!("XCPlite A2L detected, {} addressing mode", project_no.project_number);
@@ -448,10 +448,10 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
 
             // Get index from addr, in relative addressing mode the high word of the segment address is the segment index
             // @@@@ TODO: Improve checking and maybe automatically set the mode
-          let mut index = number as u16; // Default index is the same as number
+            let mut index = number as u16; // Default index is the same as number
             if relative_segment_addressing {
                 let i = ((addr >> 16) & 0x7FFF) as u16; // @@@@ TODO: Abstract address encoding
-                index =  i;
+                index = i;
             }
 
             let res = registry.cal_seg_list.add_a2l_cal_seg(name, index, Some(number), addr_ext, addr, size);
@@ -597,9 +597,8 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
         // If we add an instance with duplicate name and different event id, this would be ambigous
         // We can not reconstruct event indexes here, because the event names already have the index appended
         // So we make the instance name unique by using the event name as prefix
-        let unique_name =
-         // Check if there is already an instance with the same name
-        if registry.instance_list.get_instance(&name,object_type,None).is_some() {
+        // Check if there is already an instance with the same name
+        let unique_name = if registry.instance_list.get_instance(&name, object_type, None).is_some() {
             if let Some(event_id) = event_id {
                 if let Some(event) = registry.event_list.find_event_id(event_id) {
                     warn!("Measurement instance name '{}' is not unique, using event name '{}' as prefix", name, event.name);
@@ -608,13 +607,11 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
                     name
                 }
             } else {
-                name      
-            } 
-                    
+                name
+            }
         } else {
             name
-        } ;
-
+        };
 
         // Add measurement instance
         let res = registry.instance_list.add_instance(unique_name, dim_type, mc_support_data, address);

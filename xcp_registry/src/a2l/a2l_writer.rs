@@ -584,7 +584,9 @@ impl McTypeDef {
                         }
                         McObjectType::Unspecified => {
                             // A2L needs objects type specified in typedef field leafs
-                            return Err(a2l_error(format!("typedef {type_name} field {field_name}: unspecified object type can not be represented in A2L")));
+                            return Err(a2l_error(format!(
+                                "typedef {type_name} field {field_name}: unspecified object type can not be represented in A2L"
+                            )));
                         }
                     }
                 }
@@ -1263,7 +1265,10 @@ ASAP2_VERSION 1 71
 
     pub fn write_a2l(&mut self, title_comment: &str, project_name: &str, project_description: &str, module_name: &str, project_no: &str) -> Result<(), std::io::Error> {
         if project_name.is_empty() || module_name.is_empty() || project_no.is_empty() {
-            return Err(std::io::Error::new(std::io::ErrorKind::InvalidInput, "A2L writer: project name, module name and project number must not be empty"));
+            return Err(std::io::Error::new(
+                std::io::ErrorKind::InvalidInput,
+                "A2L writer: project name, module name and project number must not be empty",
+            ));
         }
         self.write_a2l_head(title_comment, project_name, project_description, module_name, project_no)?;
         self.write_a2l_modpar()?;

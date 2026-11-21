@@ -216,7 +216,9 @@ impl From<McIdentifier> for String {
 
 // Replace every byte which is not alphanumeric, an underscore or a dot with an underscore
 fn to_identifier(s: &str) -> String {
-    s.bytes().map(|b| if b.is_ascii_alphanumeric() || b == b'_' || b == b'.' { char::from(b) } else { '_' }).collect()
+    s.bytes()
+        .map(|b| if b.is_ascii_alphanumeric() || b == b'_' || b == b'.' { char::from(b) } else { '_' })
+        .collect()
 }
 
 fn check_identifier(s: &str) -> bool {
