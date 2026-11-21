@@ -7,8 +7,9 @@ calls the `xcp_registry` API directly (`add_typedef` / `add_typedef_field` / `ad
 without any intermediate descriptor data structures.  
 
 The generated code emits fully-qualified `::xcp_registry::...` paths, so the consuming crate
-must depend on `xcp_registry` directly. This crate itself does **not** depend on `xcp_registry`
-(no dependency cycle), it only emits paths as tokens.  
+must list `xcp_registry` as a **direct dependency** in its `Cargo.toml`, also when it gets the
+macros through a re-export of another crate such as `xcp_lite`. This crate itself does **not**
+depend on `xcp_registry` (no dependency cycle), it only emits paths as tokens.  
 
 See the design specification in [`DESIGN.md`](DESIGN.md) and examples in the `examples` folder.  
 

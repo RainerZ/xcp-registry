@@ -400,7 +400,7 @@ Enable the `a2l_reader` Cargo feature to load or validate A2L files:
 
 ```toml
 [dependencies]
-xcp_registry = { version = "3", features = ["a2l_reader"] }
+xcp_registry = { version = "0.1", features = ["a2l_reader"] }
 ```
 
 ### Load an A2L file into a registry
@@ -491,6 +491,12 @@ match registry.add_typedef("MyStruct", 16) {
 In practice you rarely call the low-level API above directly.  
 The `#[derive(McRegisterType)]` proc-macro (crate `xcp_registry_derive`) generates
 the necessary `add_typedef` / `add_typedef_field` / `add_instance` calls for a Rust struct.
+
+> **Note:** the generated code refers to this crate by its name, `::xcp_registry`. A crate that
+> uses `#[derive(McRegisterType)]` or `#[derive(McRegisterEnum)]` must therefore list
+> `xcp_registry` as a **direct dependency** in its `Cargo.toml`, also when it gets the macros
+> through a re-export of another crate such as `xcp_lite`. Both must use compatible versions of
+> `xcp_registry`.
 
 ### Minimal example
 
