@@ -9,6 +9,8 @@
 // must depend on `xcp_registry` directly. This crate does NOT depend on `xcp_registry`.
 
 #![forbid(unsafe_code)]
+#![warn(missing_docs)]
+#![doc = include_str!("../README.md")]
 
 use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
@@ -22,6 +24,9 @@ mod ty;
 use attr::{Classifier, FieldAttrs, Qualifier};
 use ty::BaseType;
 
+/// Derive `xcp_registry::McRegisterType` for a struct
+/// The generated `register` method adds the struct as type definition with all its fields to the registry.
+/// Fields can be annotated with `#[characteristic(...)]`, `#[axis(...)]` or `#[measurement(...)]`, see the crate documentation.
 #[proc_macro_derive(McRegisterType, attributes(characteristic, axis, measurement))]
 pub fn derive_mc_register_type(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);

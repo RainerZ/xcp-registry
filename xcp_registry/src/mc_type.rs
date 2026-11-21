@@ -12,7 +12,7 @@ use super::McText;
 
 /// Dimensional type with meta data
 /// Used to describe the type of a variable and its meta data
-/// May be a scalar, an array [x_dim] or a matrix [x_dim][y_dim] of its basic type
+/// May be a scalar, an array `[x_dim]` or a matrix `[x_dim][y_dim]` of its basic type
 /// The basic type may be a scalar (u8,u16,...,f64), a binary block blob or a reference to a typedef
 /// May have meta data for Measurement and Characteristic objects
 /// May refer to axis objects
@@ -20,9 +20,12 @@ use super::McText;
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McDimType {
+    /// Basic type of one element
     pub value_type: McValueType,
+    /// Array dimension in x direction, `None` for a scalar
     #[serde(skip_serializing_if = "Option::is_none")]
     pub x_dim: Option<u16>,
+    /// Array dimension in y direction, `None` if not a matrix
     #[serde(skip_serializing_if = "Option::is_none")]
     pub y_dim: Option<u16>,
 }
@@ -107,30 +110,44 @@ impl std::fmt::Display for McDimType {
 #[derive(Debug, Copy, Clone, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub enum McValueType {
+    /// Unknown or unsupported type
     Unknown,
+    /// Boolean, 1 byte
     Bool,
+    /// Unsigned 8 bit integer
     Ubyte,
+    /// Unsigned 16 bit integer
     Uword,
+    /// Unsigned 32 bit integer
     Ulong,
+    /// Unsigned 64 bit integer
     Ulonglong,
+    /// Signed 8 bit integer
     Sbyte,
+    /// Signed 16 bit integer
     Sword,
+    /// Signed 32 bit integer
     Slong,
+    /// Signed 64 bit integer
     Slonglong,
+    /// 32 bit IEEE floating point
     Float32Ieee,
+    /// 64 bit IEEE floating point
     Float64Ieee,
-    Blob(McText),          // IDL for this type, type is !sized
-    TypeDef(McIdentifier), // McIdentifier of a type definition in TypeDefList
+    /// Binary object of variable size, described by an IDL text
+    Blob(McText),
+    /// Structure, refers to a [`McTypeDef`](crate::McTypeDef) in the registry by its name
+    TypeDef(McIdentifier),
 }
 
 impl McValueType {
-    // McValueType::TypeDef
+    /// Create a `TypeDef` value type, which refers to the type definition `name`
     pub fn new_typedef<T: Into<McIdentifier>>(name: T) -> Self {
         let name: McIdentifier = name.into();
         McValueType::TypeDef(name)
     }
 
-    // McValueType::Blob
+    /// Create a `Blob` value type with the IDL description `text`
     pub fn new_blob<T: Into<McText>>(text: T) -> Self {
         let text: McText = text.into();
         McValueType::Blob(text)
@@ -182,8 +199,9 @@ impl McValueType {
         }
     }
 
-    // Get data type size
-    // Used by the register macros
+    /// Get the size of the type in bytes, 1 for a `TypeDef`, whose size is not known here
+    /// # Panics
+    /// For `Blob` and `Unknown`
     pub fn get_size(&self) -> usize {
         match self {
             McValueType::Ubyte | McValueType::Sbyte | McValueType::Bool => 1,
@@ -199,7 +217,7 @@ impl McValueType {
         }
     }
 
-    // Create from size and signed flag
+    /// Get the integer value type with the given size in bytes and signedness, `Unknown` for an unsupported size
     pub fn from_integer_size(size: usize, signed: bool) -> McValueType {
         match (size, signed) {
             (1, false) => McValueType::Ubyte,
@@ -214,7 +232,7 @@ impl McValueType {
         }
     }
 
-    // Create from size for floating point
+    /// Get the floating point value type with the given size in bytes, `Unknown` for an unsupported size
     pub fn from_float_size(size: usize) -> McValueType {
         match size {
             4 => McValueType::Float32Ieee,

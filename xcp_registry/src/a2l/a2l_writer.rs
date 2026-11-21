@@ -481,7 +481,7 @@ impl GenerateA2l for McCalibrationSegment {
 // TYPEDEF_STRUCTURE
 
 impl McTypeDef {
-    pub fn write_typedef(&self, writer: &mut A2lWriter, level: usize) -> std::io::Result<()> {
+    pub(crate) fn write_typedef(&self, writer: &mut A2lWriter, level: usize) -> std::io::Result<()> {
         let type_length = self.size;
         let type_name = self.name.as_str();
 

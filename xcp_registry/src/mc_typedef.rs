@@ -16,16 +16,20 @@ use super::RegistryError;
 //-------------------------------------------------------------------------------------------------
 // McTypeDef
 
-// Type definition for McValueType::TypeDef(type_name)
+/// Structure type definition, referred to by its name with `McValueType::TypeDef`
 #[derive(Debug, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McTypeDef {
+    /// Name of the type
     pub name: McIdentifier,
-    pub fields: McTypeDefFieldList, // Fields of the struct type_name
-    pub size: usize,                // Size of the struct type_name in bytes
+    /// Fields of the struct type_name
+    pub fields: McTypeDefFieldList,
+    /// Size of the struct type_name in bytes
+    pub size: usize,
 }
 
 impl McTypeDef {
+    /// Create a type definition without fields
     pub fn new<T: Into<McIdentifier>>(name: T, size: usize) -> McTypeDef {
         let name: McIdentifier = name.into();
         McTypeDef {
@@ -35,18 +39,24 @@ impl McTypeDef {
         }
     }
 
+    /// Get the name of the type
     pub fn get_name(&self) -> &'static str {
         self.name.as_str()
     }
 
+    /// Find a field by name
     pub fn find_field(&self, name: &str) -> Option<&McTypeDefField> {
         self.fields.into_iter().find(|field| field.name == name)
     }
 
+    /// Find a field by name, for modification
     pub fn find_field_mut(&mut self, name: &str) -> Option<&mut McTypeDefField> {
         self.fields.0.iter_mut().find(|f| f.name == name)
     }
 
+    /// Add a field
+    /// # Errors
+    /// `RegistryError::Duplicate` if a field with this name already exists
     pub fn add_field<T: Into<McIdentifier>>(&mut self, name: T, dim_type: McDimType, mc_support_data: McSupportData, offset: u16) -> Result<(), RegistryError> {
         let name: McIdentifier = name.into();
 
@@ -64,6 +74,7 @@ impl McTypeDef {
 //----------------------------------------------------------------------------------------------
 // McTypeDefFieldList
 
+/// List of all type definitions of a registry
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct McTypeDefList(Vec<McTypeDef>);
 
@@ -81,23 +92,29 @@ impl DerefMut for McTypeDefList {
 }
 
 impl McTypeDefList {
+    /// Create an empty list
     pub fn new() -> Self {
         McTypeDefList(Vec::with_capacity(16))
     }
 
+    /// Append a type definition without any checks
     pub fn push(&mut self, object: McTypeDef) {
         self.0.push(object);
     }
+    /// Remove all type definitions
     pub fn clear(&mut self) {
         self.0.clear();
     }
+    /// Find a type definition by name, for modification
     pub fn find_typedef_mut(&mut self, name: &str) -> Option<&mut McTypeDef> {
         self.0.iter_mut().find(|i| i.name == name)
     }
+    /// Find a type definition by name
     pub fn find_typedef(&self, name: &str) -> Option<&McTypeDef> {
         self.0.iter().find(|i| i.name == name)
     }
 
+    /// Sort the list by name
     pub fn sort_by_name(&mut self) {
         self.0.sort_by_key(|a| a.name);
     }
@@ -115,16 +132,22 @@ impl<'a> IntoIterator for &'a McTypeDefList {
 //-------------------------------------------------------------------------------------------------
 // McTypeDefField
 
+/// Field of a structure type definition
 #[derive(Debug, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McTypeDefField {
+    /// Name of the field
     pub name: McIdentifier,
-    pub dim_type: McDimType,            // Type name and matrix dimensions, recursion here if McValueType::TypeDef
-    pub mc_support_data: McSupportData, // Metadata for the field
-    pub offset: u16,                    // Offset of the field in the struct ABI
+    /// Type name and matrix dimensions, recursion here if McValueType::TypeDef
+    pub dim_type: McDimType,
+    /// Metadata for the field
+    pub mc_support_data: McSupportData,
+    /// Offset of the field in the struct ABI
+    pub offset: u16,
 }
 
 impl McTypeDefField {
+    /// Create a field description
     pub fn new<T: Into<McIdentifier>>(field_name: T, dim_type: McDimType, mc_support_data: McSupportData, offset: u16) -> McTypeDefField {
         McTypeDefField {
             name: field_name.into(),
@@ -134,6 +157,7 @@ impl McTypeDefField {
         }
     }
 
+    /// Get the name of the field
     pub fn get_name(&self) -> &'static str {
         self.name.as_str()
     }

@@ -58,6 +58,8 @@ impl McAddrMode {
 // McAddress
 // Information needed to access data instances
 
+/// Addressing information of a measurement or calibration object
+/// Calibration segment relative, event relative, absolute or a raw A2L address, see [`McAddrMode`]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct McAddress {
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -119,24 +121,29 @@ fn skip_addr_offset(value: &i32) -> bool {
 impl McAddress {
     // XCPlite addressing modes (for default addressing scheme XCPLITE__CASDD in XCPlite):
 
-    // Segment relative addressing (for CAL objects) ((index|0x8000)<<16+offset)  (CANape does not support addr_ext != 0 in memory segments))
+    /// Segment relative addressing (for CAL objects) ((index|0x8000)<<16+offset)  (CANape does not support addr_ext != 0 in memory segments))
     pub const XCP_ADDR_EXT_SEG: u8 = 0;
 
-    // Absolute addressing (not used for rust, but registry can handle it)
+    /// Absolute addressing (not used for rust, but registry can handle it)
     pub const XCP_ADDR_EXT_ABS: u8 = 1;
 
-    // Base pointer relative addressing (for DAQ objects and asychronous read/write access)
-    // xcp-lite for Rust uses only one base pointer for event relative addressing (in xcplib, the base pointer index is encoded in the address extension (XCP_ADDR_EXT_DYN+index)
-    // We call XcpEventExt(baseptr-XCP_ADDR_EXT_DYN_OFFSET_OFFSET) to allow offsets in the range [-XCP_ADDR_EXT_DYN_OFFSET_OFFSET, XCP_ADDR_EXT_DYN_OFFSET_MASK-XCP_ADDR_EXT_DYN_OFFSET_OFFSET]
+    /// Base pointer relative addressing (for DAQ objects and asychronous read/write access)
+    /// xcp-lite for Rust uses only one base pointer for event relative addressing (in xcplib, the base pointer index is encoded in the address extension (XCP_ADDR_EXT_DYN+index)
+    /// We call XcpEventExt(baseptr-XCP_ADDR_EXT_DYN_OFFSET_OFFSET) to allow offsets in the range [-XCP_ADDR_EXT_DYN_OFFSET_OFFSET, XCP_ADDR_EXT_DYN_OFFSET_MASK-XCP_ADDR_EXT_DYN_OFFSET_OFFSET]
     pub const XCP_ADDR_EXT_DYN: u8 = 2;
+    /// Offset added to an event relative address offset, negative offsets down to `-XCP_ADDR_EXT_DYN_OFFSET_OFFSET` can be encoded
     pub const XCP_ADDR_EXT_DYN_OFFSET_OFFSET: i32 = 0x10000;
+    /// Number of address bits used for the offset of an event relative address
     pub const XCP_ADDR_EXT_DYN_OFFSET_BITS: u8 = 22;
+    /// Mask for the offset bits of an event relative address
     pub const XCP_ADDR_EXT_DYN_OFFSET_MASK: u32 = 0x003FFFFF;
 
     /// Undefined
     pub const XCP_ADDR_EXT_UNDEF: u8 = 0xFF;
+    /// Undefined address offset
     pub const XCP_ADDR_OFFSET_UNDEF: i32 = 0x80000000u32.cast_signed();
 
+    /// Create a calibration segment relative address, `addr_offset` bytes from the start of the calibration segment `calseg_name`
     pub fn new_calseg_rel<T: Into<McIdentifier>>(calseg_name: T, addr_offset: i32) -> Self {
         McAddress {
             calseg_name: Some(calseg_name.into()),
@@ -148,6 +155,7 @@ impl McAddress {
         }
     }
 
+    /// Create an absolute address `addr_offset` for an object associated with the event `event_id`
     pub fn new_event_abs(event_id: u16, addr_offset: i32) -> Self {
         McAddress {
             calseg_name: None,
@@ -177,7 +185,7 @@ impl McAddress {
         }
     }
 
-    // Generic from A2L
+    /// Create an address from a raw A2L address and address extension, as read from an A2L file
     pub fn new_a2l(a2l_addr: u32, a2l_addr_ext: u8) -> Self {
         McAddress {
             calseg_name: None,
@@ -189,7 +197,7 @@ impl McAddress {
         }
     }
 
-    // Generic from A2L with IF_DATA XCP event
+    /// Create an address from a raw A2L address and address extension with an associated event, as read from an A2L file with `IF_DATA XCP`
     pub fn new_a2l_with_event(event_id: u16, a2l_addr: u32, a2l_addr_ext: u8) -> Self {
         McAddress {
             calseg_name: None,
@@ -217,6 +225,8 @@ impl McAddress {
     }
 
     /// Check address mode is segment relative
+    /// # Panics
+    /// If the address is segment relative, but has no calibration segment name
     pub fn is_segment_relative(&self) -> bool {
         if self.addr_mode.is_segment_relative() {
             assert!(self.calseg_name.is_some());
@@ -227,6 +237,8 @@ impl McAddress {
     }
 
     /// Check address mode is event relative
+    /// # Panics
+    /// If the address is event relative, but has no event id
     pub fn is_event_relative(&self) -> bool {
         if self.addr_mode.is_event_relative() {
             assert!(self.event_id.is_some());
@@ -236,15 +248,16 @@ impl McAddress {
         }
     }
 
-    // Get name of the calibration segment of a calibration object
+    /// Get name of the calibration segment of a calibration object
     pub fn get_calseg_name(&self) -> Option<McIdentifier> {
         self.calseg_name
     }
 
-    // Get event id of the event associated with a measurement signal
+    /// Get event id of the event associated with a measurement signal
     pub fn get_event_id(&self) -> Option<u16> {
         self.event_id
     }
+    /// Get the event id, `0xFFFF` if there is none
     pub fn get_event_id_unchecked(&self) -> u16 {
         self.get_event_id().unwrap_or(
             0xFFFF, // Invalid event id, used in sorting by event id
@@ -263,6 +276,8 @@ impl McAddress {
     }
 
     /// Add an offset to an address
+    /// # Panics
+    /// If the address mode is `Undef`
     // Infallible: value is always < u32::MAX (bounded by protocol)
     #[allow(clippy::cast_possible_truncation)]
     #[allow(clippy::cast_sign_loss)]
@@ -302,7 +317,7 @@ impl McAddress {
         (addr_ext, a2l_addr)
     }
 
-    // Get A2L addr (ext,addr) of a CalSeg
+    /// Get A2L addr (ext,addr) of a CalSeg
     pub fn get_calseg_ext_addr_base(calseg_index: u16) -> (u8, u32) {
         // McAddress format for calibration segment field is index | 0x8000 in high word, addr_ext is 0 (CANape does not support addr_ext in memory segments)
         let addr_ext = McAddress::XCP_ADDR_EXT_SEG;
@@ -310,8 +325,8 @@ impl McAddress {
         (addr_ext, addr)
     }
 
-    // Get A2L addr (ext,addr) for a calibration value field at offset in a CalSeg
-    // The address is relative to the base addr of the calibration segment
+    /// Get A2L addr (ext,addr) for a calibration value field at offset in a CalSeg
+    /// The address is relative to the base addr of the calibration segment
     pub fn get_calseg_ext_addr(calseg_index: u16, offset: u16) -> (u8, u32) {
         {
             let (addr_ext, mut addr) = McAddress::get_calseg_ext_addr_base(calseg_index);
@@ -321,6 +336,9 @@ impl McAddress {
     }
 
     /// Get address extension and address for A2L generation and the XCP protocol
+    /// # Panics
+    /// If the calibration segment of a segment relative address is not in `registry`,
+    /// if the offset is out of range for the address mode, or if the address mode is `Undef`
     pub fn get_a2l_addr(&self, registry: &Registry) -> (u8, u32) {
         match self.addr_mode {
             // Event relative addressing with async access
@@ -343,11 +361,11 @@ impl McAddress {
         }
     }
 
-    // Get raw A2L addr (ext,addr) stored in the McAddress
-    // This is used when the address is imported from a third party A2L file
-    // No conversion is done
-    // # Panics
-    // If the address mode is not A2L
+    /// Get raw A2L addr (ext,addr) stored in the McAddress
+    /// This is used when the address is imported from a third party A2L file
+    /// No conversion is done
+    /// # Panics
+    /// If the address mode is not A2L
     pub fn get_raw_a2l_addr(&self) -> (u8, u32) {
         assert!(self.addr_mode.is_a2l(), "Raw A2L address is only available for A2L addressing modes");
         (self.a2l_addr_ext, self.a2l_addr)

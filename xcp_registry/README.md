@@ -56,14 +56,14 @@ let mut registry = Registry::new();
 
 Set optional rendering modes before populating (see [Registry modes](#registry-modes)):
 
-```rust
+```rust,ignore
 registry.set_flatten_typedefs_mode(false); // default: false → use TYPEDEF_STRUCTURE
 registry.set_prefix_names_mode(false);     // default: false → no app-name prefix
 ```
 
 Set the XCP Ethernet transport parameters so the A2L gets an `IF_DATA XCP` section:
 
-```rust
+```rust,ignore
 use std::net::Ipv4Addr;
 registry.set_xcp_eth_params("UDP", Ipv4Addr::new(127, 0, 0, 1), 5555);
 ```
@@ -75,7 +75,7 @@ registry.set_xcp_eth_params("UDP", Ipv4Addr::new(127, 0, 0, 1), 5555);
 `Registry::application` is an `McApplication` value.  
 Set name, description, application id and version (EPK and EPK address) before writing the A2L:
 
-```rust
+```rust,ignore
 registry.application.set_info("my_app", "My application description", 1);
 registry.application.set_version("v1.2.3", 0x0000_0000);
 ```
@@ -89,7 +89,7 @@ Add one typedef per struct type, then add each struct field individually.
 
 ### Adding a typedef
 
-```rust
+```rust,ignore
 use xcp_registry::{McSupportData, McObjectType, McValueType, McDimType};
 
 // Register type "ControlParams" with its total size in bytes
@@ -107,7 +107,7 @@ Each field needs:
 - a `McSupportData` with metadata (at minimum: `McObjectType`)
 - the byte offset of the field within the struct
 
-```rust
+```rust,ignore
 use xcp_registry::{McSupportData, McObjectType, McValueType, McDimType};
 
 // Scalar f64 field "gain" at byte offset 0, calibration characteristic
@@ -147,7 +147,7 @@ already exists (idempotent if the layout is identical; emits a warning on ABI mi
 
 ### Full example – building a typedef manually
 
-```rust
+```rust,ignore
 use xcp_registry::{Registry, McDimType, McValueType, McSupportData, McObjectType};
 
 let mut registry = Registry::new();
@@ -183,7 +183,7 @@ registry.add_typedef_field(
 An `McInstance` binds a type (possibly a typedef) to a name and an address.  
 Instances are added directly to the registry's `instance_list`.
 
-```rust
+```rust,ignore
 use xcp_registry::{McDimType, McValueType, McSupportData, McObjectType, McAddress};
 
 // Calibration instance of typedef "PidParams" relative to calibration segment "calseg"
@@ -221,7 +221,7 @@ registry.instance_list.add_instance(
 Use `get_instance_mut` to obtain a mutable reference, then call the `update_*` methods
 on `mc_support_data` (which take `&mut self` and return `&mut Self` for chaining):
 
-```rust
+```rust,ignore
 if let Some(inst) = registry.instance_list.get_instance_mut("speed", None) {
     inst.mc_support_data
         .update_unit("m/s")
@@ -239,7 +239,7 @@ The second argument to `get_instance_mut` is an optional `event_id` filter
 
 Use `find_typedef_mut` on the typedef list, then `find_field_mut` on the typedef:
 
-```rust
+```rust,ignore
 if let Some(field) = registry.typedef_list
     .find_typedef_mut("PidParams")
     .and_then(|td| td.find_field_mut("kp"))
@@ -260,7 +260,7 @@ nested typedefs, use `Registry::set_instance_field_support_data`.  The field is 
 by a **dot-separated path** relative to the instance's typedef — field names live in their
 typedef's namespace, not a flat global namespace.
 
-```rust
+```rust,ignore
 // Instance "pid" has typedef "PidController"
 //   PidController::gains  →  typedef "GainStruct"
 //     GainStruct::kp      →  f64
@@ -313,13 +313,13 @@ Two distinct setter families are available:
 
 ### Required field
 
-```rust
+```rust,ignore
 McSupportData::new(McObjectType::Measurement)   // Measurement | Characteristic | Axis
 ```
 
 ### Builder chain (construction time)
 
-```rust
+```rust,ignore
 McSupportData::new(McObjectType::Characteristic)
     .set_unit("°C")                     // physical unit string
     .set_linear(0.1, -40.0, "°C")      // factor=0.1, offset=-40.0, implicit set_unit
@@ -332,7 +332,7 @@ McSupportData::new(McObjectType::Characteristic)
 
 ### Mutation chain (post-registration)
 
-```rust
+```rust,ignore
 // Update metadata on an instance that was already added to the registry
 if let Some(inst) = registry.instance_list.get_instance_mut("temp", None) {
     inst.mc_support_data
@@ -361,7 +361,7 @@ if let Some(inst) = registry.instance_list.get_instance_mut("temp", None) {
 
 For maps/curves whose axes are separate objects:
 
-```rust
+```rust,ignore
 McSupportData::new(McObjectType::Characteristic)
     .set_x_axis_ref(Some("speed_axis".into()))
     .set_y_axis_ref(Some("temp_axis".into()))
@@ -371,7 +371,7 @@ McSupportData::new(McObjectType::Characteristic)
 
 ## Writing A2L
 
-```rust
+```rust,ignore
 registry.write_a2l(
     "my_app.a2l",           // output file path
     "/* generated */",      // title comment
@@ -405,7 +405,7 @@ xcp_registry = { version = "3", features = ["a2l_reader"] }
 
 ### Load an A2L file into a registry
 
-```rust
+```rust,ignore
 let mut registry = Registry::new();
 let warnings = registry.load_a2l(
     "my_app.a2l",
@@ -422,7 +422,7 @@ an A2ML description. An A2L file with `/include "XCP_104.aml"` still requires `X
 
 ### Validate an A2L file (syntax + consistency check)
 
-```rust
+```rust,ignore
 let warnings = registry.check_a2l("my_app.a2l")?;
 ```
 
@@ -432,7 +432,7 @@ let warnings = registry.check_a2l("my_app.a2l")?;
 
 The registry can be round-tripped through JSON (non standard, faster and less memory than A2L):
 
-```rust
+```rust,ignore
 // Serialize to JSON
 registry.write_json(&"registry.json")?;
 
@@ -443,7 +443,7 @@ registry.load_json(&"registry.json")?;
 
 `McSupportData` also has dedicated string helpers for embedding in other JSON structures:
 
-```rust
+```rust,ignore
 let s: String = mc_support_data.to_json_string();
 let m: Option<McSupportData> = McSupportData::from_json_string(&s);
 ```
@@ -467,7 +467,7 @@ preserved regardless.
 
 All mutating registry calls return `Result<_, RegistryError>`:
 
-```rust
+```rust,ignore
 use xcp_registry::RegistryError;
 
 match registry.add_typedef("MyStruct", 16) {
@@ -511,7 +511,7 @@ This generates code equivalent to the manual example in the [Type definitions](#
 
 Override the default classification or add metadata per field:
 
-```rust
+```rust,ignore
 #[derive(McRegisterType)]
 struct ControlParams {
     #[characteristic(unit = "dB", min = 0.0, max = 100.0, comment = "Proportional gain")]

@@ -16,35 +16,41 @@ use super::McValueType;
 #[derive(Debug, Default, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub enum McObjectType {
+    /// Object type not specified
     #[default]
     Unspecified = 0,
+    /// Measurement signal
     Measurement = 1,
+    /// Calibration parameter
     Characteristic = 2,
+    /// Axis of a calibration curve or map
     Axis = 3,
 }
 
 impl McObjectType {
-    // Measurement object
-    // Could be a explicit measurement object or a typedef
+    /// Measurement object
+    /// Could be a explicit measurement object or a typedef
     pub fn is_measurement_object(self) -> bool {
         self == McObjectType::Measurement
     }
 
-    // Calibration object with calibration parameter semantic
-    // Could be a explicit calibration or axis object or a typedef instance with calibration semantics
-    // Is constant in target software, so it is never modified by the target ECU
+    /// Calibration object with calibration parameter semantic
+    /// Could be a explicit calibration or axis object or a typedef instance with calibration semantics
+    /// Is constant in target software, so it is never modified by the target ECU
+    /// # Panics
+    /// If the object type is `Unspecified`
     pub fn is_calibration_object(self) -> bool {
         // @@@@ TODO: McObjectType::Unspecified defaults to calibration object
         assert!(self != McObjectType::Unspecified);
         self == McObjectType::Characteristic || self == McObjectType::Axis || self == McObjectType::Unspecified
     }
 
-    // Sub attributes of calibration_object which is axis, characteristic or typedef
+    /// Check if this is an axis
     pub fn is_axis(self) -> bool {
         self == McObjectType::Axis
     }
 
-    // Characteristic object
+    /// Check if this is a characteristic
     pub fn is_characteristic(self) -> bool {
         self == McObjectType::Characteristic
     }
@@ -79,15 +85,20 @@ impl std::fmt::Display for McObjectType {
 #[derive(Debug, Default, Clone, Copy, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub enum McObjectQualifier {
+    /// No qualifier
     #[default]
     Default = 0,
-    ReadOnly = 1,      // For read-only parameter objects
-    ReadWrite = 2,     // For writable measurement objects
-    NoAsyncAccess = 3, // For objects that can not be accessed asynchronously
+    /// For read-only parameter objects
+    ReadOnly = 1,
+    /// For writable measurement objects
+    ReadWrite = 2,
+    /// For objects that can not be accessed asynchronously
+    NoAsyncAccess = 3,
 }
 
 impl McObjectQualifier {
     // used for serde, need &self
+    /// Check if this is `Default`
     pub fn is_default(&self) -> bool {
         *self == McObjectQualifier::Default
     }
@@ -109,50 +120,65 @@ impl std::fmt::Display for McObjectQualifier {
 #[derive(Debug, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McSupportData {
-    pub object_type: McObjectType, // Measurement, Characteristic or Axis
+    /// Measurement, Characteristic or Axis
+    pub object_type: McObjectType,
 
+    /// Access qualifier
     #[serde(skip_serializing_if = "McObjectQualifier::is_default")]
     #[serde(default)]
     pub qualifier: McObjectQualifier,
 
+    /// Factor of the linear conversion `physical = value * factor + offset`, `None` for 1
     #[serde(skip_serializing_if = "Option::is_none")]
     pub factor: Option<f64>,
 
+    /// Offset of the linear conversion `physical = value * factor + offset`, `None` for 0
     #[serde(skip_serializing_if = "Option::is_none")]
     pub offset: Option<f64>,
 
+    /// Physical unit, or the description of an enumeration in the format `0 "OFF" 1 "ON"`
     #[serde(default)]
     #[serde(skip_serializing_if = "McText::is_empty")]
     pub unit: McText,
 
+    /// Description text
     #[serde(default)]
     #[serde(skip_serializing_if = "McText::is_empty")]
     pub comment: McText,
 
+    /// Lower limit, `None` for the limit of the value type
     #[serde(skip_serializing_if = "Option::is_none")]
     pub min: Option<f64>,
 
+    /// Upper limit, `None` for the limit of the value type
     #[serde(skip_serializing_if = "Option::is_none")]
     pub max: Option<f64>,
 
+    /// Step size for calibration
     #[serde(skip_serializing_if = "Option::is_none")]
     pub step: Option<f64>,
 
+    /// Name of the x axis referenced by a curve or map
     #[serde(skip_serializing_if = "Option::is_none")]
     pub x_axis_ref: Option<McIdentifier>,
 
+    /// Name of the y axis referenced by a map
     #[serde(skip_serializing_if = "Option::is_none")]
     pub y_axis_ref: Option<McIdentifier>,
 
+    /// Name of the input quantity of the x axis
     #[serde(skip_serializing_if = "Option::is_none")]
     pub x_axis_input_quantity: Option<McIdentifier>,
 
+    /// Name of the input quantity of the y axis
     #[serde(skip_serializing_if = "Option::is_none")]
     pub y_axis_input_quantity: Option<McIdentifier>,
 
+    /// Name of the conversion of a fixed x axis
     #[serde(skip_serializing_if = "Option::is_none")]
     pub x_axis_conv: Option<McIdentifier>,
 
+    /// Name of the conversion of a fixed y axis
     #[serde(skip_serializing_if = "Option::is_none")]
     pub y_axis_conv: Option<McIdentifier>,
 }
@@ -254,6 +280,7 @@ impl std::fmt::Display for McSupportData {
 }
 
 impl McSupportData {
+    /// Create metadata for an object of the given type, all other properties are unset
     pub fn new(object_type: McObjectType) -> Self {
         McSupportData {
             object_type,
@@ -323,10 +350,12 @@ impl McSupportData {
 
     // Read and write json string
 
+    /// Serialize to a JSON string
     pub fn to_json_string(&self) -> String {
         serde_json::to_string(self).unwrap()
     }
 
+    /// Deserialize from a JSON string, `None` if the string is not valid
     pub fn from_json_string(s: &str) -> Option<Self> {
         match serde_json::from_str(s) {
             Ok(m) => Some(m),
@@ -337,7 +366,7 @@ impl McSupportData {
         }
     }
 
-    // Conversion rule
+    /// Convert a raw value to the physical value `value * factor + offset`
     pub fn convert(&self, value: f64) -> f64 {
         let mut result = value;
         // physical_value = value * factor + offset !!
@@ -353,22 +382,28 @@ impl McSupportData {
     //-----------------------------------------
     // Setters for builder syntax (consume self, return Self — for use at construction time)
 
+    /// Set the object type
+    /// # Panics
+    /// If `object_type` is `Unspecified`
     pub fn set_object_type(mut self, object_type: McObjectType) -> Self {
         assert!(object_type != McObjectType::Unspecified);
         self.object_type = object_type;
         self
     }
+    /// Set the access qualifier
     pub fn set_qualifier(mut self, qualifier: McObjectQualifier) -> Self {
         self.qualifier = qualifier;
         self
     }
 
+    /// Set the linear conversion `physical = value * factor + offset` and the physical unit
     pub fn set_linear<T: Into<McText>>(mut self, factor: f64, offset: f64, unit: T) -> Self {
         self.unit = unit.into();
         self.factor = if (factor - 1.0).abs() > f64::EPSILON { Some(factor) } else { None };
         self.offset = if offset.abs() > f64::EPSILON { Some(offset) } else { None };
         self
     }
+    /// Set the conversion factor, a factor of 1 is stored as `None`
     pub fn set_factor(mut self, factor: Option<f64>) -> Self {
         if let Some(factor) = factor {
             self.factor = if (factor - 1.0).abs() > f64::EPSILON { Some(factor) } else { None };
@@ -377,6 +412,7 @@ impl McSupportData {
         self.factor = None;
         self
     }
+    /// Set the conversion offset, an offset of 0 is stored as `None`
     pub fn set_offset(mut self, offset: Option<f64>) -> Self {
         if let Some(offset) = offset {
             self.offset = if offset.abs() > f64::EPSILON { Some(offset) } else { None };
@@ -386,50 +422,62 @@ impl McSupportData {
         self
     }
 
+    /// Set the access qualifier to `ReadWrite`
     pub fn set_read_write(mut self) -> Self {
         self.qualifier = McObjectQualifier::ReadWrite;
         self
     }
+    /// Set the physical unit
     pub fn set_unit<T: Into<McText>>(mut self, unit: T) -> Self {
         self.unit = unit.into();
         self
     }
+    /// Set the description text
     pub fn set_comment<T: Into<McText>>(mut self, comment: T) -> Self {
         self.comment = comment.into();
         self
     }
+    /// Set the lower limit
     pub fn set_min(mut self, min: Option<f64>) -> Self {
         self.min = min;
         self
     }
+    /// Set the upper limit
     pub fn set_max(mut self, max: Option<f64>) -> Self {
         self.max = max;
         self
     }
+    /// Set the step size for calibration
     pub fn set_step(mut self, step: Option<f64>) -> Self {
         self.step = step;
         self
     }
+    /// Set the name of the x axis
     pub fn set_x_axis_ref<T: Into<McIdentifier>>(mut self, x_axis_ref: Option<T>) -> Self {
         self.x_axis_ref = x_axis_ref.map(|s| s.into());
         self
     }
+    /// Set the name of the y axis
     pub fn set_y_axis_ref<T: Into<McIdentifier>>(mut self, y_axis_ref: Option<T>) -> Self {
         self.y_axis_ref = y_axis_ref.map(|s| s.into());
         self
     }
+    /// Set the name of the input quantity of the x axis
     pub fn set_x_axis_input_quantity<T: Into<McIdentifier>>(mut self, x_axis_input_quantity: Option<T>) -> Self {
         self.x_axis_input_quantity = x_axis_input_quantity.map(|s| s.into());
         self
     }
+    /// Set the name of the input quantity of the y axis
     pub fn set_y_axis_input_quantity<T: Into<McIdentifier>>(mut self, y_axis_input_quantity: Option<T>) -> Self {
         self.y_axis_input_quantity = y_axis_input_quantity.map(|s| s.into());
         self
     }
+    /// Set the name of the conversion of a fixed x axis
     pub fn set_x_axis_conv<T: Into<McIdentifier>>(mut self, x_axis_conv: Option<T>) -> Self {
         self.x_axis_conv = x_axis_conv.map(|s| s.into());
         self
     }
+    /// Set the name of the conversion of a fixed y axis
     pub fn set_y_axis_conv<T: Into<McIdentifier>>(mut self, y_axis_conv: Option<T>) -> Self {
         self.y_axis_conv = y_axis_conv.map(|s| s.into());
         self
@@ -583,7 +631,7 @@ impl McSupportData {
         None
     }
 
-    // Get the physical conversion offset
+    /// Get the physical conversion offset
     pub fn get_offset(&self) -> Option<f64> {
         if let Some(offset) = self.offset {
             if offset != 0.0 {

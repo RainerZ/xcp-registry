@@ -53,13 +53,18 @@ impl Default for McApplicationVersion {
 #[derive(Debug, Default, Ord, PartialOrd, Eq, PartialEq, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McApplication {
-    pub app_id: u8,                    // Unique identifier for the application
-    pub name: McIdentifier,            // Name of the application, used as A2L filename and module name
-    pub description: McText,           // Optional description of the application
-    pub version: McApplicationVersion, // Version or EPK string with address
+    /// Unique identifier for the application
+    pub app_id: u8,
+    /// Name of the application, used as A2L filename and module name
+    pub name: McIdentifier,
+    /// Optional description of the application
+    pub description: McText,
+    /// Version or EPK string with address
+    pub version: McApplicationVersion,
 }
 
 impl McApplication {
+    /// Create an application description with empty name, description and version
     pub fn new() -> McApplication {
         McApplication {
             app_id: 0,
@@ -127,29 +132,29 @@ pub struct Registry {
     #[serde(skip_deserializing)]
     a2ml_mode: McA2mlMode,
 
-    // Application name and software version
+    /// Application name and software version
     pub application: McApplication,
 
-    // XCP transport layer parameters
+    /// XCP transport layer parameters
     #[serde(skip_serializing)]
     #[serde(skip_deserializing)]
     pub xcp_tl_params: Option<McXcpTransportLayer>,
 
-    // XCP protocol layer parameters
+    /// XCP protocol layer parameters
     #[serde(skip_serializing)]
     #[serde(skip_deserializing)]
     pub xcp_params: Option<McXcpProtocolLayer>,
 
-    // All eventss
+    /// All events
     pub event_list: McEventList,
 
-    // All calibration segments, sorted list
+    /// All calibration segments, sorted list
     pub cal_seg_list: McCalibrationSegmentList,
 
-    // All typedefs, sorted list
+    /// All typedefs, sorted list
     pub typedef_list: McTypeDefList,
 
-    // All measurement and calibration objects, sorted list
+    /// All measurement and calibration objects, sorted list
     pub instance_list: McInstanceList,
 }
 
@@ -220,6 +225,7 @@ impl Registry {
     pub fn set_flatten_typedefs_mode(&mut self, flatten_typedefs: bool) {
         self.flatten_typedefs = flatten_typedefs;
     }
+    /// Get the flatten typedefs mode, see [`Registry::set_flatten_typedefs_mode`]
     pub fn get_flatten_typedefs_mode(&self) -> bool {
         self.flatten_typedefs
     }
@@ -228,6 +234,7 @@ impl Registry {
     pub fn set_prefix_names_mode(&mut self, prefix_names: bool) {
         self.prefix_names = prefix_names;
     }
+    /// Get the prefix names mode, see [`Registry::set_prefix_names_mode`]
     pub fn get_prefix_names_mode(&self) -> bool {
         self.prefix_names
     }
@@ -236,6 +243,7 @@ impl Registry {
     pub fn set_a2ml_mode(&mut self, a2ml_mode: McA2mlMode) {
         self.a2ml_mode = a2ml_mode;
     }
+    /// Get the A2ML mode, see [`Registry::set_a2ml_mode`]
     pub fn get_a2ml_mode(&self) -> McA2mlMode {
         self.a2ml_mode
     }
@@ -244,6 +252,8 @@ impl Registry {
     // Typedefs
 
     /// Add a typedef component to a typedef
+    /// # Errors
+    /// `RegistryError::NotFound` if the typedef does not exist, `RegistryError::Duplicate` if the field already exists
     pub fn add_typedef_field<T: Into<McIdentifier>>(
         &mut self,
         type_name: &str,
@@ -281,6 +291,8 @@ impl Registry {
     }
 
     /// Add a typedef
+    /// # Errors
+    /// `RegistryError::Duplicate` if a typedef with this name already exists, the existing definition is kept
     pub fn add_typedef<T: Into<McIdentifier>>(&mut self, type_name: T, size: usize) -> Result<&mut McTypeDef, RegistryError> {
         let type_name = type_name.into();
         log::debug!("Registry add_typedef: {} size={}", type_name, size);
@@ -396,6 +408,8 @@ impl Registry {
     // Read and write registry from or to JSON file
 
     /// Serialize registry to JSON file
+    /// # Errors
+    /// If the file can not be written or the registry can not be serialized
     pub fn write_json<P: AsRef<std::path::Path>>(&self, path: &P) -> Result<(), std::io::Error> {
         let path: &std::path::Path = path.as_ref();
         log::info!("Write JSON file {}", path.display());
@@ -407,6 +421,8 @@ impl Registry {
     }
 
     /// Deserialize registry from JSON file
+    /// # Errors
+    /// If the file can not be read or is not a valid registry JSON file
     pub fn load_json<P: AsRef<std::path::Path>>(&mut self, path: &P) -> Result<(), std::io::Error> {
         let path: &std::path::Path = path.as_ref();
         log::info!("Load JSON file {}", path.display());

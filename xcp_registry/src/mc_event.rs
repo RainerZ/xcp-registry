@@ -23,13 +23,20 @@ use super::McText;
 #[derive(Debug, Default, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McEvent {
-    pub name: McIdentifier,        // Name of the event, not unique name
-    pub index: u16,                // Instance index 1..n, 0 if single instance
-    pub id: u16,                   // Unique event id number used in A2L and XCP protocol, unique event identifier for an application
-    pub target_cycle_time_ns: u32, // 0 -> no cycle time = sporadic event
-    pub function: Option<McText>,  // Name of the function where the event is defined, used to find local variables for this event
-    pub unit: Option<usize>,       // Index of the compilation unit where the event is defined, used to find local variables for this event
-    pub cfa: i32,                  // Canonical stack frame address offset where the event is defined, used to access local variables for this event
+    /// Name of the event, not unique name
+    pub name: McIdentifier,
+    /// Instance index 1..n, 0 if single instance
+    pub index: u16,
+    /// Unique event id number used in A2L and XCP protocol, unique event identifier for an application
+    pub id: u16,
+    /// 0 -> no cycle time = sporadic event
+    pub target_cycle_time_ns: u32,
+    /// Name of the function where the event is defined, used to find local variables for this event
+    pub function: Option<McText>,
+    /// Index of the compilation unit where the event is defined, used to find local variables for this event
+    pub unit: Option<usize>,
+    /// Canonical stack frame address offset where the event is defined, used to access local variables for this event
+    pub cfa: i32,
 }
 
 impl McEvent {
@@ -58,9 +65,9 @@ impl McEvent {
         self.id
     }
 
-    // Set the event id
-    // For internal use only
-    // The event id must be unique, no checks
+    /// Set the event id
+    /// For internal use only
+    /// The event id must be unique, no checks
     pub fn set_id(&mut self, id: u16) {
         self.id = id;
     }
@@ -87,6 +94,7 @@ impl McEvent {
 //----------------------------------------------------------------------------------------------
 // McEventList
 
+/// List of all events of a registry
 #[derive(Debug, Default, Serialize, Deserialize)]
 pub struct McEventList(Vec<McEvent>);
 
@@ -104,11 +112,14 @@ impl DerefMut for McEventList {
 }
 
 impl McEventList {
+    /// Create an empty list
     pub fn new() -> Self {
         McEventList(Vec::with_capacity(100))
     }
 
     /// Add an XCP event with name, index and cycle time in ns
+    /// # Errors
+    /// `RegistryError::Duplicate` if an event with the same name and index, or with the same id, already exists
     pub fn add_event(&mut self, event: McEvent) -> Result<(), RegistryError> {
         log::debug!("Registry add_event: {:?} ", event);
 
@@ -125,14 +136,17 @@ impl McEventList {
         Ok(())
     }
 
+    /// Append an event without any checks
     pub fn push(&mut self, object: McEvent) {
         self.0.push(object);
     }
 
+    /// Sort the list by name
     pub fn sort_by_name(&mut self) {
         self.0.sort_by_key(|a| a.name);
     }
 
+    /// Sort the list by event id
     pub fn sort_by_id(&mut self) {
         self.0.sort_by_key(|a| a.id);
     }
@@ -157,6 +171,8 @@ impl McEventList {
     /// Store the unit index and function name where the event is defined
     /// This is used to find local variables for this event
     /// Multiple events may be defined in the same function
+    /// # Errors
+    /// `RegistryError::NotFound` if there is no event with this name
     pub fn set_event_location(&mut self, name: &str, unit_idx: usize, function: &str, cfa: i32) -> Result<(), RegistryError> {
         if let Some(event) = self.0.iter_mut().find(|e| e.name == name) {
             event.unit = Some(unit_idx);

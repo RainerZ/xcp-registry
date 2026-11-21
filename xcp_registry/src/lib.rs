@@ -4,6 +4,8 @@
 // Standalone pure-Rust crate — no C/xcplib dependency
 
 #![forbid(unsafe_code)]
+#![warn(missing_docs)]
+#![doc = include_str!("../README.md")]
 
 // EPK calibration segment constants
 // Used by the A2L reader/writer to identify the XCPlite EPK segment
@@ -95,30 +97,39 @@ pub use xcp_registry_derive::McRegisterType;
 #[derive(Error, Debug)]
 #[non_exhaustive]
 pub enum RegistryError {
+    /// I/O error while reading or writing a file
     #[error("io error")]
     Io(#[from] std::io::Error),
 
+    /// An object with this name already exists
     #[error("registry error: duplicate symbol `{0}` ")]
     Duplicate(String),
 
+    /// No object with this name was found
     #[error("registry error: `{0}` not found")]
     NotFound(String),
 
+    /// No event with this id is defined
     #[error("registry error: event id not defined `{0}` ")]
     UnknownEventChannel(u16),
 
+    /// The field already has metadata, it can not be set again
     #[error("registry error: metadata already set for field `{0}`")]
     MetadataAlreadySet(String),
 
+    /// An index exceeds its value range
     #[error("registry error: index overflow")]
     IndexOverflow,
 
+    /// The object type of the named object is `McObjectType::Unspecified`
     #[error("registry error: object type of `{0}` is unspecified")]
     ObjectTypeUnspecified(String),
 
+    /// An A2L file could not be read or used, with a description of the problem
     #[error("A2L error: {0}")]
     A2l(String),
 
+    /// Unspecified error
     #[error("unknown error")]
     Unknown,
 }
@@ -128,12 +139,17 @@ pub enum RegistryError {
 // XCP Transport layer parameters
 // For A2l XCP IF_DATA
 
+/// XCP transport layer parameters, written to the `IF_DATA XCP` block of the A2L file
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McXcpTransportLayer {
+    /// Protocol name: `"UDP"`, `"TCP"`, `"CAN"` or `"SxI"`
     pub protocol_name: &'static str,
+    /// IPv4 address of the XCP server, for UDP and TCP
     pub addr: Option<Ipv4Addr>,
+    /// Port of the XCP server, for UDP and TCP
     pub port: Option<u16>,
+    /// Baud rate, for SxI
     pub baud_rate: Option<u32>,
 }
 
@@ -153,10 +169,13 @@ impl Default for McXcpTransportLayer {
 // XCP Protocol layer parameters
 // For A2l XCP IF_DATA
 
+/// XCP protocol layer parameters, written to the `IF_DATA XCP` block of the A2L file
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 #[non_exhaustive]
 pub struct McXcpProtocolLayer {
+    /// Maximum size of a command packet (CTO) in bytes
     pub max_cto: u8,
+    /// Maximum size of a data packet (DTO) in bytes
     pub max_dto: u16,
 }
 
@@ -237,6 +256,8 @@ pub fn get_lock() -> RegistryGuard {
 
 /// Get a reference to the closed registry singleton
 /// Close and flatten if not already closed
+/// # Panics
+/// If the registry is not initialized with [`init`]
 pub fn get() -> &'static Registry {
     if lock(&CLOSED_REGISTRY).is_none() {
         // Close the mutable registry singleton
@@ -255,6 +276,8 @@ pub fn is_closed() -> bool {
 /// Close registry
 /// No more changes allowed
 /// Move registry to read only singleton
+/// # Panics
+/// If the registry is not initialized with [`init`]
 pub fn close() {
     // Check if registry is already closed
     if is_closed() {
@@ -387,6 +410,9 @@ fn create_flattened_instance_list(reg: &mut Registry, typedef_index: &HashMap<&'
     flat_instance_list
 }
 
+/// Replace all instances of a typedef in `reg` by instances of basic type, one for each leaf field, with mangled names (`instance.field`, `instance._i.field` for array elements)
+/// # Panics
+/// If a typedef refers to a typedef which is not in the registry
 pub fn flatten_registry(reg: &mut Registry) {
     log::info!("Flattening typedef structure in registry into mangled instance names !");
 

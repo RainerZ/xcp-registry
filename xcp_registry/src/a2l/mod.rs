@@ -45,6 +45,9 @@ impl Registry {
     /// Check A2L file
     /// Syntax and consistency check an A2L file
     /// IF_DATA XCP is checked with the built-in XCP A2ML specification, an A2ML description in the A2L file is not required
+    /// Returns the number of warnings
+    /// # Errors
+    /// `RegistryError::A2l` if the file can not be read or parsed
     #[cfg(feature = "a2l_reader")]
     pub fn check_a2l<P: AsRef<std::path::Path>>(&self, path: &P) -> Result<u32, RegistryError> {
         // Read A2L file into A2lFile
@@ -84,6 +87,9 @@ impl Registry {
     /// check - perform additional consistency checks and print warnings to log
     /// flatten_typedefs - flatten nested typedefs to basic type instances with mangled names
     /// IF_DATA XCP is parsed with the built-in XCP A2ML specification, an A2ML description in the A2L file is not required
+    /// Returns the number of warnings
+    /// # Errors
+    /// `RegistryError::A2l` if the file can not be read or parsed, or if its content can not be used
     #[cfg(feature = "a2l_reader")]
     pub fn load_a2l<P: AsRef<std::path::Path>>(&mut self, path: &P, print_warnings: bool, strict: bool, check: bool, flatten_typedefs: bool) -> Result<u32, RegistryError> {
         //
@@ -135,6 +141,11 @@ impl Registry {
     /// # Arguments
     /// path - path to A2L file on disk
     /// check - check A2L file after writing (by reading it again with a2lfile crate)
+    /// # Errors
+    /// If the file can not be written, or if the registry contains something which can not be represented in A2L
+    /// (error kind `InvalidData` or `InvalidInput`)
+    /// # Panics
+    /// If an address in the registry is inconsistent, see [`McAddress::get_a2l_addr`]
     pub fn write_a2l<P: AsRef<std::path::Path>>(
         &self,
         path: &P,

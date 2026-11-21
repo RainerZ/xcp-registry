@@ -15,22 +15,28 @@ use serde::Serialize;
 //-------------------------------------------------------------------------------------------------
 // McText
 
+/// Text with `'static` lifetime, e.g. a comment or a unit
+/// Created from a `&'static str` without cost, created from a `String` the string is leaked
 #[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq, Hash, Serialize)]
 pub struct McText(&'static str);
 
 impl McText {
+    /// Create an empty text
     pub fn empty() -> Self {
         McText("")
     }
 
+    /// Create from a string literal
     pub fn new(s: &'static str) -> Self {
         McText(s)
     }
 
+    /// Get the text as string slice
     pub fn as_str(&self) -> &'static str {
         self.0
     }
 
+    /// Check if the text is empty
     pub fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
@@ -137,22 +143,29 @@ impl PartialEq<McText> for &str {
 //-------------------------------------------------------------------------------------------------
 // McIdentifier
 
+/// Name of a registry object with `'static` lifetime
+/// Only ASCII letters, digits, `_` and `.` are allowed, every other byte is replaced by `_`
+/// Created from a valid `&'static str` without cost, otherwise the string is leaked
 #[derive(Debug, Copy, Clone, Default, Ord, PartialOrd, Eq, PartialEq, Hash, Serialize)]
 pub struct McIdentifier(&'static str);
 
 impl McIdentifier {
+    /// Create an empty identifier
     pub fn empty() -> Self {
         McIdentifier("")
     }
 
+    /// Create from a string literal, invalid characters are replaced by `_`
     pub fn new(s: &'static str) -> Self {
         s.into()
     }
 
+    /// Get the identifier as string slice
     pub fn as_str(&self) -> &'static str {
         self.0
     }
 
+    /// Check if the identifier is empty
     pub fn is_empty(&self) -> bool {
         self.0.is_empty()
     }
