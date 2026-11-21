@@ -1,0 +1,439 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "hello_xcp_cpp",
+    "description": "created from a2lfile project hello_xcp_cpp",
+    "version": {
+      "epk": "22_27_56",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "calc64",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "mainloop",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 8,
+      "number": 0
+    },
+    {
+      "name": "Parameters",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 16,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "ParametersT",
+      "fields": [
+        {
+          "name": "min",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Minimum random number value",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "max",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Maximum random number value",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 8
+        }
+      ],
+      "size": 16
+    },
+    {
+      "name": "FloatingAverage",
+      "fields": [
+        {
+          "name": "current_index_",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Current position in the ring buffer",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "sample_count_",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Number of samples collected so far",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "sum_",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Running sum of all samples",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 16
+        }
+      ],
+      "size": 1048
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "input",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "V",
+        "comment": "Input value for floating average",
+        "min": 0.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "average",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Current calculated average",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 4
+      }
+    },
+    {
+      "name": "current_index_",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Current position in ring buffer",
+        "min": 0.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 5
+      }
+    },
+    {
+      "name": "sample_count_",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Number of samples collected",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 6
+      }
+    },
+    {
+      "name": "sum_",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Running sum of all samples",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 7
+      }
+    },
+    {
+      "name": "global_counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Global counter variable",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Local counter variable",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 4
+      }
+    },
+    {
+      "name": "input_voltage",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "V",
+        "comment": "Input voltage",
+        "min": -100.0,
+        "max": 100.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 5
+      }
+    },
+    {
+      "name": "average_voltage1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Calculated average <128> on input_voltage",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 6
+      }
+    },
+    {
+      "name": "average_voltage2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Calculated average <64>on input_voltage-10",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 7
+      }
+    },
+    {
+      "name": "average_voltage3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Calculated average <64> on input_voltage+10",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 8
+      }
+    },
+    {
+      "name": "Parameters",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "ParametersT"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Random number generator parameters"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "FloatingAverage",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "FloatingAverage"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "This instance of FloatingAverage"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 8
+      }
+    },
+    {
+      "name": "average_filter1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "FloatingAverage"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Local (stack) instance of FloatingAverage<128>"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 9
+      }
+    },
+    {
+      "name": "average_filter2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "FloatingAverage"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Heap RAII instance of FloatingAverage<64>"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 10
+      }
+    },
+    {
+      "name": "average_filter3",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "FloatingAverage"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Heap instance of FloatingAverage<64>"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 11
+      }
+    }
+  ]
+}

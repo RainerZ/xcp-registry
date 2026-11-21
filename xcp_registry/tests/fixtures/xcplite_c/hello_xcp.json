@@ -1,0 +1,278 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "hello_xcp",
+    "description": "created from a2lfile project hello_xcp",
+    "version": {
+      "epk": "21_38_16",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "calc_power",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "mainloop",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 8,
+      "number": 0
+    },
+    {
+      "name": "params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 12,
+      "number": 1
+    }
+  ],
+  "typedef_list": [],
+  "instance_list": [
+    {
+      "name": "params.counter_max",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Maximum counter value",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "params.delay_us",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "us",
+        "comment": "Mainloop delay time in us",
+        "min": 0.0,
+        "max": 999999.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549188
+      }
+    },
+    {
+      "name": "params.flow_rate",
+      "dim_type": {
+        "value_type": "Float32Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "m3/h",
+        "comment": "Flow rate",
+        "min": 0.0,
+        "max": 2.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549192
+      }
+    },
+    {
+      "name": "t1",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Parameter t1 in function calc_power",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65535,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "t2",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Parameter t2 in function calc_power",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65534,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "diff_temp",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Local variable diff temperature in function calc_power",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65520,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "heat_power",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Local variable calculated heat power in function calc_power",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65512,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "outside_temperature",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "offset": -55.0,
+        "comment": "Temperature in °C read from outside sensor",
+        "min": -20.0,
+        "max": 50.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 147458,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "inside_temperature",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "offset": -55.0,
+        "comment": "Temperature in °C read from inside sensor",
+        "min": 0.0,
+        "max": 40.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 147459,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "heat_energy",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "kWh",
+        "comment": "Accumulated heat energy in kWh",
+        "min": 0.0,
+        "max": 10000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 147552,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "global_counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Global free running counter",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 147560,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131062,
+        "a2l_addr_ext": 2
+      }
+    }
+  ]
+}

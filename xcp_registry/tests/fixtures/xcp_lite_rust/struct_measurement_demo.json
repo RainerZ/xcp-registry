@@ -1,0 +1,546 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "struct_measurement_demo",
+    "description": "created from a2lfile project struct_measurement_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_43Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "cycle_counter",
+      "index": 0,
+      "id": 2,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "cycle_time_histogram",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_loop",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "struct_params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 24,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "Counters",
+      "fields": [
+        {
+          "name": "a",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "counter",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "b",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "counter*2",
+            "min": 0.0,
+            "max": 2000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "c",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "counter*3",
+            "min": 0.0,
+            "max": 3000.0
+          },
+          "offset": 8
+        }
+      ],
+      "size": 24
+    },
+    {
+      "name": "Point",
+      "fields": [
+        {
+          "name": "x",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "x-coordinate",
+            "min": -10.0,
+            "max": 10.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "y",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "y-coordinate",
+            "min": -10.0,
+            "max": 10.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "z",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "z-coordinate",
+            "min": -10.0,
+            "max": 10.0
+          },
+          "offset": 8
+        }
+      ],
+      "size": 12
+    },
+    {
+      "name": "Data",
+      "fields": [
+        {
+          "name": "cpu_temperature",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "offset": -50.0,
+            "unit": "deg/celcius",
+            "comment": "cpu temperature in grad celcius",
+            "min": -50.0,
+            "max": 150.0
+          },
+          "offset": 4204
+        },
+        {
+          "name": "vector",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "Point"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 4192
+        },
+        {
+          "name": "point_array",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "Point"
+            },
+            "x_dim": 8
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 4096
+        },
+        {
+          "name": "float_matrix",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 32,
+            "y_dim": 32
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Matrix of 16*16 float values",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 0
+        }
+      ],
+      "size": 4208
+    },
+    {
+      "name": "Parameters",
+      "fields": [
+        {
+          "name": "mainloop_cycle_time",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "us",
+            "comment": "Cycle time of the mainloop",
+            "min": 100.0,
+            "max": 10000.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Counter wraparound",
+            "min": 0.0,
+            "max": 10000.0
+          },
+          "offset": 20
+        },
+        {
+          "name": "ampl",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Amplitude of the sine signal",
+            "min": 0.0,
+            "max": 500.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "period",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Period of the sine signal",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 8
+        }
+      ],
+      "size": 24
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "cycle_time_histogram.histogram",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Cycle time histogram",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259640,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_counter",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 1.8446744073709552e+19
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8454144,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_time_histogram.counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Cycle counter",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259848,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_time_histogram.cycle_time",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 1e-6,
+        "unit": "s",
+        "comment": "Cycle time",
+        "min": 0.0,
+        "max": 4294.9672949999995
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259852,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_time_histogram.cycle_time_max",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "us",
+        "comment": "Cycle time maximum",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259856,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_time_histogram.cycle_time_min",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "us",
+        "comment": "Cycle time minimum",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259860,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_time_histogram.reset",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Reset flag",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259864,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cycle_time_histogram.step_us",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 50.0,
+        "unit": "us",
+        "min": 0.0,
+        "max": 214748364750.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259844,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter1",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "mainloop counter 1",
+        "min": 0.0,
+        "max": 1.8446744073709552e+19
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 61172,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter2",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "mainloop counter 2",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 61184,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counters",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Counters"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 61188,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "data",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Data"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 61212,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "struct_params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Parameters"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

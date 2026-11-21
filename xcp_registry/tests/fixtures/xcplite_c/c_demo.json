@@ -1,0 +1,608 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "c_demo",
+    "description": "created from a2lfile project c_demo",
+    "version": {
+      "epk": "21_38_16",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "mainloop",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 8,
+      "number": 0
+    },
+    {
+      "name": "params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 140,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "params_t",
+      "fields": [
+        {
+          "name": "test_byte1",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Test byte for calibration consistency test",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "test_byte2",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Test byte for calibration consistency test",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 9
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 2000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "delay_us",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "us",
+            "comment": "Mainloop sleep time in us",
+            "min": 0.0,
+            "max": 1000000.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "map",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo map",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 10
+        },
+        {
+          "name": "curve",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Demo curve with fixed axis",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 76
+        }
+      ],
+      "size": 140
+    },
+    {
+      "name": "params_measurement_t",
+      "fields": [
+        {
+          "name": "test_byte1",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Test byte for calibration consistency test",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "test_byte2",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Test byte for calibration consistency test",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 9
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Maximum counter value",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "delay_us",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Mainloop delay time in us",
+            "min": 0.0,
+            "max": 0.0
+          },
+          "offset": 4
+        }
+      ],
+      "size": 140
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "array_f32",
+      "dim_type": {
+        "value_type": "Float32Ieee",
+        "x_dim": 8
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "array float[8]",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65472,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "matrix_f32",
+      "dim_type": {
+        "value_type": "Float32Ieee",
+        "x_dim": 8,
+        "y_dim": 4
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "matrix float[4][8]",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65344,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 1734011510,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163928,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163930,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163932,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163936,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter8s",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163944,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter16s",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163946,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter32s",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163948,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "g_counter64s",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 163952,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "counter8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65189,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65186,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65180,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": 0.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65168,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter8s",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65167,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter16s",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65164,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter32s",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65160,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter64s",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Measurement variable",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65152,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "params_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Calibration parameters"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "params_copy",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "params_measurement_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "A copy of the current calibration parameters"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 172656,
+        "a2l_addr_ext": 1
+      }
+    }
+  ]
+}

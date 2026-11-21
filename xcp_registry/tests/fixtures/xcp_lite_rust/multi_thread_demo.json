@@ -1,0 +1,639 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "multi_thread_demo",
+    "description": "created from a2lfile project multi_thread_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_44Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "task_1",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_2",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_3",
+      "index": 0,
+      "id": 2,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_4",
+      "index": 0,
+      "id": 3,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_5",
+      "index": 0,
+      "id": 4,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_6",
+      "index": 0,
+      "id": 5,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_7",
+      "index": 0,
+      "id": 6,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_8",
+      "index": 0,
+      "id": 7,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_9",
+      "index": 0,
+      "id": 8,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_10",
+      "index": 0,
+      "id": 9,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_11",
+      "index": 0,
+      "id": 10,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "multi_thread_params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 24,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "Params",
+      "fields": [
+        {
+          "name": "delay",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "factor": 1e-6,
+            "unit": "s",
+            "comment": "Task delay time in s, ecu internal value as u32 in us",
+            "min": 0.00001,
+            "max": 2.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "ampl",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Amplitude of the sine signal",
+            "min": 0.0,
+            "max": 500.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "period",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Period of the sine signal",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Counter maximum value",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 20
+        }
+      ],
+      "size": 24
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter_1",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65540,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_2",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259840,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259844,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_3",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8454144,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8454148,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_4",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12648448,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_4",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12648452,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_5",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16842752,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_5",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16842756,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_6",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21037056,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_6",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21037060,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_7",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25231360,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_7",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25231364,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_8",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29425664,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29425668,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_9",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 8,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 33619968,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_9",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 8,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 33619972,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_10",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 9,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 37814272,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_10",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 9,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 37814276,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_11",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 10,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 42008576,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine_11",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine wave signal",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 10,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 42008580,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "multi_thread_params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Params"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

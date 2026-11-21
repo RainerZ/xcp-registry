@@ -1,0 +1,473 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "rayon_demo",
+    "description": "created from a2lfile project rayon_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_42Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "loop",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_1",
+      "index": 0,
+      "id": 2,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_2",
+      "index": 0,
+      "id": 3,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_3",
+      "index": 0,
+      "id": 4,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_4",
+      "index": 0,
+      "id": 5,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_5",
+      "index": 0,
+      "id": 6,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_6",
+      "index": 0,
+      "id": 7,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_7",
+      "index": 0,
+      "id": 8,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_8",
+      "index": 0,
+      "id": 9,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_9",
+      "index": 0,
+      "id": 10,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_10",
+      "index": 0,
+      "id": 11,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_11",
+      "index": 0,
+      "id": 12,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "update",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "mandelbrot",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 24,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "Mandelbrot",
+      "fields": [
+        {
+          "name": "x",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 0
+        },
+        {
+          "name": "y",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 8
+        },
+        {
+          "name": "width",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 16
+        }
+      ],
+      "size": 24
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "mainloop_counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "mainloop counter",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65568,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_1",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8454162,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_2",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12648466,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_3",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16842770,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_4",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21037074,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_5",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25231378,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_6",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29425682,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_7",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 8,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 33619986,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_8",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 9,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 37814290,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_9",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 10,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 42008594,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_10",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 11,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 46202898,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "line_11",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50397202,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "elapsed_time",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "s",
+        "comment": "calculation duration",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259844,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "update_counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "update counter",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259860,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "mandelbrot",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Mandelbrot"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

@@ -1,0 +1,497 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "cpp_demo",
+    "description": "created from a2lfile project cpp_demo",
+    "version": {
+      "epk": "22_27_57",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "SigGen1",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "SigGen2",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "mainloop",
+      "index": 0,
+      "id": 2,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 8,
+      "number": 0
+    },
+    {
+      "name": "kParameters",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 8,
+      "number": 1
+    },
+    {
+      "name": "SigGen1",
+      "index": 2,
+      "addr": 2147614720,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 88,
+      "number": 2
+    },
+    {
+      "name": "SigGen2",
+      "index": 3,
+      "addr": 2147680256,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 88,
+      "number": 3
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "ParametersT",
+      "fields": [
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Maximum counter value",
+            "min": 0.0,
+            "max": 2000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "delay_us",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "us",
+            "comment": "Mainloop delay time in us",
+            "min": 0.0,
+            "max": 999999.0
+          },
+          "offset": 4
+        }
+      ],
+      "size": 8
+    },
+    {
+      "name": "LookupTableT",
+      "fields": [
+        {
+          "name": "values",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Lookup table",
+            "min": -1.0,
+            "max": 1.0
+          },
+          "offset": 0
+        }
+      ],
+      "size": 44
+    },
+    {
+      "name": "SignalParametersT",
+      "fields": [
+        {
+          "name": "signal_type",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "0 \"SINE\" 1 \"SQUARE\" 2 \"TRIANGLE\" 3 \"SAWTOOTH\" 4 \"ARBITRARY\"",
+            "comment": "Signal type",
+            "min": 0.0,
+            "max": 4.0
+          },
+          "offset": 80
+        },
+        {
+          "name": "ampl",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Amplitude",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "phase",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Phase",
+            "min": 0.0,
+            "max": 6.28319
+          },
+          "offset": 8
+        },
+        {
+          "name": "offset",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Offset",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "period",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Period",
+            "min": 0.01,
+            "max": 10.0
+          },
+          "offset": 24
+        },
+        {
+          "name": "delay_us",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "us",
+            "comment": "Mainloop delay time in us",
+            "min": 0.0,
+            "max": 999999.0
+          },
+          "offset": 76
+        },
+        {
+          "name": "lookup",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "LookupTableT"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 32
+        }
+      ],
+      "size": 88
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "SigGen1.value_",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Signal generator output",
+        "min": -100.0,
+        "max": 100.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 24,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "SigGen1.time",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "s",
+        "comment": "Signal generator time",
+        "min": 0.0,
+        "max": 3600.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65504,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "SigGen2.value_",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Signal generator output",
+        "min": -100.0,
+        "max": 100.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65560,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "SigGen2.time",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "s",
+        "comment": "Signal generator time",
+        "min": 0.0,
+        "max": 3600.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131040,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "temperature",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "offset": -50.0,
+        "comment": "Motor temperature in °C",
+        "min": -50.0,
+        "max": 200.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "speed",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "km/h",
+        "comment": "Speed in km/h",
+        "min": 0.0,
+        "max": 250.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 4
+      }
+    },
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop loop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 5
+      }
+    },
+    {
+      "name": "sum",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Sum of SigGen1 and SigGen2 value",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 6
+      }
+    },
+    {
+      "name": "loop_cycletime",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 0.001,
+        "comment": "Mainloop cycle time",
+        "min": 0.0,
+        "max": 0.05
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 7
+      }
+    },
+    {
+      "name": "loop_histogram",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 128
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop cycle time histogram",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 8
+      }
+    },
+    {
+      "name": "kParameters",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "ParametersT"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Main parameters"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "SigGen1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "SignalParametersT"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Signal parameters for the signal generator"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614720
+      }
+    },
+    {
+      "name": "SigGen2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "SignalParametersT"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Signal parameters for the signal generator"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147680256
+      }
+    }
+  ]
+}

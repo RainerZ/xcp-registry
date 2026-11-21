@@ -1,0 +1,312 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "hello_xcp",
+    "description": "created from a2lfile project hello_xcp",
+    "version": {
+      "epk": "Version_2026-09-03_10_57_44Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "my_event",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "my_params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 76,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "ParamStruct",
+      "fields": [
+        {
+          "name": "x",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "x coordinate",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "y",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "y coordinate",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 4
+        }
+      ],
+      "size": 8
+    },
+    {
+      "name": "Params",
+      "fields": [
+        {
+          "name": "is_active",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo bool, Start/stop counter",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 73
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo u32, Max counter value",
+            "min": 0.0,
+            "max": 1023.0
+          },
+          "offset": 56
+        },
+        {
+          "name": "delay",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "factor": 1e-6,
+            "unit": "s",
+            "comment": "Demo u32, Task delay time in s, ecu internal value as u32 in us",
+            "min": 0.00001,
+            "max": 2.0
+          },
+          "offset": 60
+        },
+        {
+          "name": "enum_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "0 \"Off\" 1 \"On\" 2 \"Standby\"",
+            "comment": "Demo enum",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 72
+        },
+        {
+          "name": "array",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo array",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 64
+        },
+        {
+          "name": "array_axis",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "comment": "Demo axis",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 68
+        },
+        {
+          "name": "matrix",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 8,
+            "y_dim": 4
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo matrix",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "struct_field",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "ParamStruct"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 48
+        },
+        {
+          "name": "struct_array_field",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "ParamStruct"
+            },
+            "x_dim": 2
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 32
+        }
+      ],
+      "size": 76
+    },
+    {
+      "name": "SensorData",
+      "fields": [
+        {
+          "name": "current",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "A",
+            "comment": "Demo struct measurement field",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 0
+        },
+        {
+          "name": "voltage",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "V",
+            "comment": "Demo struct measurement field",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 8
+        }
+      ],
+      "size": 16
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Demo measurement variable",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65572,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sensor_data",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "SensorData"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Demo measurement struct"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65576,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "my_params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Params"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

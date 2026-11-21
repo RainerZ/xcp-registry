@@ -1,0 +1,1009 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "multi_thread_demo",
+    "description": "created from a2lfile project multi_thread_demo",
+    "version": {
+      "epk": "V4_18_12_34",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "task_1",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_2",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_3",
+      "index": 0,
+      "id": 2,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_4",
+      "index": 0,
+      "id": 3,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_5",
+      "index": 0,
+      "id": 4,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_6",
+      "index": 0,
+      "id": 5,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_7",
+      "index": 0,
+      "id": 6,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "task_8",
+      "index": 0,
+      "id": 7,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 56,
+      "number": 1
+    }
+  ],
+  "typedef_list": [],
+  "instance_list": [
+    {
+      "name": "params.counter_max",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Max counter value, wrap around",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "params.ampl",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "Volt",
+        "comment": "Amplitude",
+        "min": 0.0,
+        "max": 100.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549192
+      }
+    },
+    {
+      "name": "params.period",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "s",
+        "comment": "Period",
+        "min": 0.1,
+        "max": 10.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549200
+      }
+    },
+    {
+      "name": "params.filter",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Filter coefficient",
+        "min": 0.0,
+        "max": 1.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549208
+      }
+    },
+    {
+      "name": "params.clip_max",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "Volt",
+        "comment": "Maximum value for clipping function",
+        "min": -100.0,
+        "max": 100.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549216
+      }
+    },
+    {
+      "name": "params.clip_min",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "Volt",
+        "comment": "Minimum value for clipping function",
+        "min": -100.0,
+        "max": 100.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549224
+      }
+    },
+    {
+      "name": "params.delay_us",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "us",
+        "comment": "task delay time in us",
+        "min": 0.0,
+        "max": 1000000.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549232
+      }
+    },
+    {
+      "name": "params.run",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "stop task",
+        "min": 0.0,
+        "max": 1.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549236
+      }
+    },
+    {
+      "name": "task_1.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64488,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_3.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8453096,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_5.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16841704,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_4.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12647400,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_2.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4258792,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_6.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21036008,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_7.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25230312,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_8.array",
+      "dim_type": {
+        "value_type": "Ulong",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "task array (to increase measurement workload)",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29424616,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_1.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64446,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_1.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64424,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_1.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64416,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_1.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64408,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_3.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8453054,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_3.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8453032,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_3.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8453024,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_3.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8453016,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_5.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16841662,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_5.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16841640,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_5.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16841632,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_5.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16841624,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_4.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12647358,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_4.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12647336,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_4.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12647328,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_4.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12647320,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_2.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4258750,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_2.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4258728,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_2.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4258720,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_2.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4258712,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_6.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21035966,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_6.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21035944,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_6.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21035936,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_6.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21035928,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_7.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25230270,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_7.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25230248,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_7.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25230240,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_7.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25230232,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_8.counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29424574,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_8.channel1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sine wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29424552,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_8.channel2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task square wave signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29424544,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_8.channel3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "task sawtooth signal",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29424536,
+        "a2l_addr_ext": 2
+      }
+    }
+  ]
+}

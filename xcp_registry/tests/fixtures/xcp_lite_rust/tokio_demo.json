@@ -1,0 +1,152 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "tokio_demo",
+    "description": "created from a2lfile project tokio_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_44Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "task",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 24,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "CalPage1",
+      "fields": [
+        {
+          "name": "ampl",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Amplitude of the sine signal",
+            "min": 0.0,
+            "max": 500.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "period",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Period of the sine signal",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Counter maximum value",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 16
+        }
+      ],
+      "size": 24
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Demo variable counter",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65652,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "task_index",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Index of next task to start",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65656,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "CalPage1"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

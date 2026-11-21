@@ -1,0 +1,243 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "point_cloud_demo",
+    "description": "created from a2lfile project point_cloud_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_43Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "point_cloud",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "point_cloud_params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 56,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "Params",
+      "fields": [
+        {
+          "name": "period_x",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "ampl_x",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m",
+            "min": 0.001,
+            "max": 100.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "phi_x",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "PI",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "period_y",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 24
+        },
+        {
+          "name": "ampl_y",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m",
+            "min": 0.001,
+            "max": 100.0
+          },
+          "offset": 32
+        },
+        {
+          "name": "phi_y",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "PI",
+            "min": 0.0,
+            "max": 2.0
+          },
+          "offset": 40
+        },
+        {
+          "name": "point_count",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 1.0,
+            "max": 500.0
+          },
+          "offset": 48
+        }
+      ],
+      "size": 56
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 1.8446744073709552e+19
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65360,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "h",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65376,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "phi",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65368,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "time",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65400,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "point_cloud_params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Params"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

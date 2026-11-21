@@ -1,0 +1,179 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "single_thread_demo",
+    "description": "created from a2lfile project single_thread_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_42Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "main_loop",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "thread_loop",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "calseg",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 24,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "Params",
+      "fields": [
+        {
+          "name": "ampl",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "mV",
+            "comment": "Amplitude of the sine signal in mV",
+            "min": 0.0,
+            "max": 8000.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "period",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Period of the sine signal",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Counter maximum value",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "delay",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "factor": 1e-6,
+            "unit": "s",
+            "comment": "Task delay time in s, ecu internal value as u32 in us",
+            "min": 0.00001,
+            "max": 2.0
+          },
+          "offset": 12
+        }
+      ],
+      "size": 24
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65520,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "sine",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 0.001,
+        "unit": "Volt",
+        "comment": "sine wave signal, internal value in mV",
+        "min": -32.768,
+        "max": 32.767
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259838,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "calseg",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Params"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    }
+  ]
+}

@@ -1,0 +1,486 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "point_cloud_demo",
+    "description": "created from a2lfile project point_cloud_demo",
+    "version": {
+      "epk": "19_39_15",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "step",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "Parameters",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 80,
+      "number": 1
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "ParametersT",
+      "fields": [
+        {
+          "name": "max_points",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "points",
+            "comment": "Maximum number of points in the cloud",
+            "min": 1.0,
+            "max": 1000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "boundary",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m",
+            "comment": "boundary_ box size in meters",
+            "min": 0.1,
+            "max": 100.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "gravity",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m/s²",
+            "comment": "Gravity in meters per second squared",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 64
+        },
+        {
+          "name": "min_radius",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m",
+            "comment": "Minimum point radius in meters",
+            "min": 0.01,
+            "max": 1.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "max_radius",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m",
+            "comment": "Maximum point radius in meters",
+            "min": 0.01,
+            "max": 1.0
+          },
+          "offset": 24
+        },
+        {
+          "name": "min_velocity",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m/s",
+            "comment": "Minimum point velocity in meters per second",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 32
+        },
+        {
+          "name": "max_velocity",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "m/s",
+            "comment": "Maximum point velocity in meters per second",
+            "min": 0.001,
+            "max": 10.0
+          },
+          "offset": 40
+        },
+        {
+          "name": "ttl_min",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Minimum time to live for points in seconds",
+            "min": 0.1,
+            "max": 60.0
+          },
+          "offset": 48
+        },
+        {
+          "name": "ttl_max",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Maximum time to live for points in seconds",
+            "min": 0.1,
+            "max": 60.0
+          },
+          "offset": 56
+        },
+        {
+          "name": "cycle_time_us",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "us",
+            "comment": "Cycle time of a simulation step in microseconds",
+            "min": 0.0,
+            "max": 1000000.0
+          },
+          "offset": 72
+        }
+      ],
+      "size": 80
+    },
+    {
+      "name": "Point",
+      "fields": [
+        {
+          "name": "x",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "X coordinate of the point",
+            "min": -1000000000000.0,
+            "max": 1000000000000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "y",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "Y coordinate of the point",
+            "min": -1000000000000.0,
+            "max": 1000000000000.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "z",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "Z coordinate of the point",
+            "min": -1000000000000.0,
+            "max": 1000000000000.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "r",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "Radius of the point",
+            "min": -1000000000000.0,
+            "max": 1000000000000.0
+          },
+          "offset": 12
+        }
+      ],
+      "size": 32
+    },
+    {
+      "name": "PointCloud",
+      "fields": [
+        {
+          "name": "boundary_",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "m",
+            "comment": "Current boundary box size in meters",
+            "min": -1000000000000.0,
+            "max": 1000000000000.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "step_counter_",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Global step counter",
+            "min": 0.0,
+            "max": 4294970000.0
+          },
+          "offset": 24
+        },
+        {
+          "name": "simulation_time_",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "s",
+            "comment": "Last simulation step time in seconds",
+            "min": 0.0,
+            "max": 1000000000000.0
+          },
+          "offset": 32
+        },
+        {
+          "name": "real_time_",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "unit": "s",
+            "comment": "Current real time in seconds",
+            "min": 0.0,
+            "max": 1000000000000.0
+          },
+          "offset": 40
+        },
+        {
+          "name": "count_",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Current number of points in the cloud",
+            "min": 0.0,
+            "max": 65535.0
+          },
+          "offset": 48
+        },
+        {
+          "name": "points_",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "Point"
+            },
+            "x_dim": 1000
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 52
+        }
+      ],
+      "size": 32056
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "count_",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Current point count",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "real_time_",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Current real time in ns",
+        "min": 0.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 4
+      }
+    },
+    {
+      "name": "boundary_",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Current boundary box size in meters",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 5
+      }
+    },
+    {
+      "name": "step_counter_",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Step counter",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 6
+      }
+    },
+    {
+      "name": "Parameters",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "ParametersT"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Point cloud simulation parameters"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "points_",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Point"
+        },
+        "x_dim": 1000
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Points in the cloud"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 7
+      }
+    }
+  ]
+}

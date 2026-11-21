@@ -1,0 +1,1657 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "all_features_demo",
+    "description": "created from a2lfile project all_features_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_43Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "main",
+      "index": 0,
+      "id": 11,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_local",
+      "index": 0,
+      "id": 13,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task1",
+      "index": 0,
+      "id": 12,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_1",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_2",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_3",
+      "index": 0,
+      "id": 2,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_4",
+      "index": 0,
+      "id": 3,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_5",
+      "index": 0,
+      "id": 4,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_6",
+      "index": 0,
+      "id": 6,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_7",
+      "index": 0,
+      "id": 7,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_8",
+      "index": 0,
+      "id": 8,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_9",
+      "index": 0,
+      "id": 9,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2_10",
+      "index": 0,
+      "id": 10,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "main_task2s",
+      "index": 0,
+      "id": 5,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "calseg",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 8,
+      "number": 1
+    },
+    {
+      "name": "calseg1",
+      "index": 2,
+      "addr": 2147614720,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 472,
+      "number": 2
+    },
+    {
+      "name": "calseg2",
+      "index": 3,
+      "addr": 2147680256,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 560,
+      "number": 3
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "CalPage",
+      "fields": [
+        {
+          "name": "run",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "run1",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 5
+        },
+        {
+          "name": "run2",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 6
+        },
+        {
+          "name": "cycle_time_ms",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 4294967295.0
+          },
+          "offset": 0
+        }
+      ],
+      "size": 8
+    },
+    {
+      "name": "TestStruct2",
+      "fields": [
+        {
+          "name": "test_bool",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 42
+        },
+        {
+          "name": "test_u8",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 40
+        },
+        {
+          "name": "test_u16",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 65535.0
+          },
+          "offset": 36
+        },
+        {
+          "name": "test_u32",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 4294967295.0
+          },
+          "offset": 24
+        },
+        {
+          "name": "test_u64",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.8446744073709552e+19
+          },
+          "offset": 0
+        },
+        {
+          "name": "test_i8",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 41
+        },
+        {
+          "name": "test_i16",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 38
+        },
+        {
+          "name": "test_i32",
+          "dim_type": {
+            "value_type": "Slong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -2147483648.0,
+            "max": 2147483647.0
+          },
+          "offset": 28
+        },
+        {
+          "name": "test_i64",
+          "dim_type": {
+            "value_type": "Slonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -9.223372036854776e+18,
+            "max": 9.223372036854776e+18
+          },
+          "offset": 8
+        },
+        {
+          "name": "test_f32",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 32
+        },
+        {
+          "name": "test_f64",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 16
+        }
+      ],
+      "size": 48
+    },
+    {
+      "name": "TestStruct1",
+      "fields": [
+        {
+          "name": "test_bool",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 94
+        },
+        {
+          "name": "test_u8",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 92
+        },
+        {
+          "name": "test_u16",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 65535.0
+          },
+          "offset": 88
+        },
+        {
+          "name": "test_u32",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 4294967295.0
+          },
+          "offset": 72
+        },
+        {
+          "name": "test_u64",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.8446744073709552e+19
+          },
+          "offset": 0
+        },
+        {
+          "name": "test_i8",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 93
+        },
+        {
+          "name": "test_i8_array",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 4,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 76
+        },
+        {
+          "name": "test_i16",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 90
+        },
+        {
+          "name": "test_i32",
+          "dim_type": {
+            "value_type": "Slong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -2147483648.0,
+            "max": 2147483647.0
+          },
+          "offset": 80
+        },
+        {
+          "name": "test_i64",
+          "dim_type": {
+            "value_type": "Slonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -9.223372036854776e+18,
+            "max": 9.223372036854776e+18
+          },
+          "offset": 8
+        },
+        {
+          "name": "test_f32",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 84
+        },
+        {
+          "name": "test_f64",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 16
+        },
+        {
+          "name": "test_struct",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "TestStruct2"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 24
+        }
+      ],
+      "size": 96
+    },
+    {
+      "name": "CalPage1",
+      "fields": [
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 4294967295.0
+          },
+          "offset": 448
+        },
+        {
+          "name": "test_bool",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 470
+        },
+        {
+          "name": "test_u8",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 468
+        },
+        {
+          "name": "test_u16",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 65535.0
+          },
+          "offset": 464
+        },
+        {
+          "name": "test_u32",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 4294967295.0
+          },
+          "offset": 452
+        },
+        {
+          "name": "test_u64",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 1.8446744073709552e+19
+          },
+          "offset": 128
+        },
+        {
+          "name": "test_i8",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 469
+        },
+        {
+          "name": "test_i16",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 466
+        },
+        {
+          "name": "test_i32",
+          "dim_type": {
+            "value_type": "Slong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -2147483648.0,
+            "max": 2147483647.0
+          },
+          "offset": 456
+        },
+        {
+          "name": "test_i64",
+          "dim_type": {
+            "value_type": "Slonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -9.223372036854776e+18,
+            "max": 9.223372036854776e+18
+          },
+          "offset": 136
+        },
+        {
+          "name": "test_f32",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 460
+        },
+        {
+          "name": "test_f64",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 144
+        },
+        {
+          "name": "test_struct",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "TestStruct1"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 352
+        },
+        {
+          "name": "test_array",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 8,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 152
+        },
+        {
+          "name": "test_matrix",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 8,
+            "y_dim": 16
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "test_struct_array",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "TestStruct2"
+            },
+            "x_dim": 4
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 160
+        }
+      ],
+      "size": 472
+    },
+    {
+      "name": "CalPage2",
+      "fields": [
+        {
+          "name": "ampl",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "Volt",
+            "comment": "Amplitude",
+            "min": 0.0,
+            "max": 400.0
+          },
+          "offset": 448
+        },
+        {
+          "name": "period",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "s",
+            "comment": "Period",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 456
+        },
+        {
+          "name": "array",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 16,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "ms",
+            "comment": "Demo array",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "curve_axis",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "comment": "Demo shared axis for curve1/2",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 384
+        },
+        {
+          "name": "curve1",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo curve",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 128
+        },
+        {
+          "name": "curve2",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo curve",
+            "min": -100.0,
+            "max": 100.0
+          },
+          "offset": 256
+        },
+        {
+          "name": "map_x_axis",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "comment": "Demo shared axis for map2",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 536
+        },
+        {
+          "name": "map",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "ms",
+            "comment": "Demo map",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 464
+        }
+      ],
+      "size": 560
+    },
+    {
+      "name": "TestStruct",
+      "fields": [
+        {
+          "name": "a",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Measurement struct field a",
+            "min": 0.0,
+            "max": 30.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "b",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Measurement struct field b",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "c",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "factor": 0.1,
+            "offset": 1.0,
+            "unit": "Volt",
+            "comment": "Measurement struct field c",
+            "min": -100.0,
+            "max": 30.0
+          },
+          "offset": 8
+        }
+      ],
+      "size": 24
+    },
+    {
+      "name": "TestNestedStruct",
+      "fields": [
+        {
+          "name": "s1",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "TestStruct"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 0
+        },
+        {
+          "name": "s2",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "TestStruct"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 24
+        }
+      ],
+      "size": 48
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "mainloop_counter1",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 1.8446744073709552e+19
+      },
+      "address": {
+        "event_id": 11,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 46202716,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "mainloop_local_var1",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 0.5,
+        "offset": 10000000.0,
+        "unit": "no unit",
+        "comment": "test local variable with conversion rule",
+        "min": 10000000.0,
+        "max": 9.223372036864776e+18
+      },
+      "address": {
+        "event_id": 11,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 46202972,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "mainloop_local_var2",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 2.0,
+        "offset": -10000000.0,
+        "unit": "no unit",
+        "comment": "test local variable with conversion rule",
+        "min": -10000000.0,
+        "max": 3.6893488147409105e+19
+      },
+      "address": {
+        "event_id": 13,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 54591468,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "array1",
+      "dim_type": {
+        "value_type": "Float64Ieee",
+        "x_dim": 256
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50395028,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394968,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_i16",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: i16",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394978,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_i32",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: i32",
+        "min": -2147483648.0,
+        "max": 2147483647.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394984,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_i64",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: i64",
+        "min": -9.223372036854776e+18,
+        "max": 9.223372036854776e+18
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394996,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_i8",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: i8",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394975,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_isize",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: i64",
+        "min": -9.223372036854776e+18,
+        "max": 9.223372036854776e+18
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50395012,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_option_u16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter optional: u8",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50395024,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_u16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: u16",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394976,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_u32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: u32",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394980,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_u64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: u64",
+        "min": 0.0,
+        "max": 1.8446744073709552e+19
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394988,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_u8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: u8",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50394974,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "counter_usize",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "counter: u64",
+        "min": 0.0,
+        "max": 1.8446744073709552e+19
+      },
+      "address": {
+        "event_id": 12,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 50395004,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_1",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65536,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4259840,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_3",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 8454144,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_4",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 3,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 12648448,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_5",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 4,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 16842752,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_6",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 6,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 25231360,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_7",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 7,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 29425664,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 8,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 33619968,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_9",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 9,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 37814272,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel_10",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 10,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 42008576,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "channel",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "Volt",
+        "comment": "sine: f64",
+        "min": -1e+32,
+        "max": 1e+32
+      },
+      "address": {
+        "event_id": 5,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 21037056,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "mainloop_struct",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "TestNestedStruct"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement"
+      },
+      "address": {
+        "event_id": 11,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 46202772,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "mainloop_struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "TestStruct"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement"
+      },
+      "address": {
+        "event_id": 11,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 46202724,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "mainloop_struct2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "TestStruct"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement"
+      },
+      "address": {
+        "event_id": 11,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 46202748,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "calseg",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "CalPage"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "calseg1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "CalPage1"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614720
+      }
+    },
+    {
+      "name": "calseg2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "CalPage2"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147680256
+      }
+    }
+  ]
+}

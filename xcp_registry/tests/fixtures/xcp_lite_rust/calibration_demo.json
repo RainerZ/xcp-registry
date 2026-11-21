@@ -1,0 +1,416 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "calibration_demo",
+    "description": "created from a2lfile project calibration_demo",
+    "version": {
+      "epk": "2026-09-03_10_57_44Z",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "cal_demo",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    },
+    {
+      "name": "cal_demo_1",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 12,
+      "number": 1
+    },
+    {
+      "name": "cal_demo_2",
+      "index": 2,
+      "addr": 2147614720,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 680,
+      "number": 2
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "CounterControl",
+      "fields": [
+        {
+          "name": "counter_on",
+          "dim_type": {
+            "value_type": "Bool",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Start/stop counter",
+            "min": 0.0,
+            "max": 1.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "counter_max",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Max counter value",
+            "min": 0.0,
+            "max": 10000.0
+          },
+          "offset": 0
+        }
+      ],
+      "size": 8
+    },
+    {
+      "name": "CalPage1",
+      "fields": [
+        {
+          "name": "delay",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "us",
+            "comment": "Task delay time in us",
+            "min": 0.0,
+            "max": 2000000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "counter_control",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "CounterControl"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 4
+        }
+      ],
+      "size": 12
+    },
+    {
+      "name": "LookUpTable",
+      "fields": [
+        {
+          "name": "lookup_axis",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "comment": "LookUpTable axis",
+            "min": 0.0,
+            "max": 10000.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "lookup_values",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "LookUpTable values",
+            "min": 0.0,
+            "max": 10000.0
+          },
+          "offset": 64
+        }
+      ],
+      "size": 128
+    },
+    {
+      "name": "Params",
+      "fields": [
+        {
+          "name": "array",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 4,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo array",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 464
+        },
+        {
+          "name": "matrix",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 9,
+            "y_dim": 5
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo matrix",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 504
+        },
+        {
+          "name": "shared_axis_16",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "comment": "Demo shared axis",
+            "min": 0.0,
+            "max": 10000.0
+          },
+          "offset": 256
+        },
+        {
+          "name": "shared_axis_9",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "comment": "Demo shared axis",
+            "min": 0.0,
+            "max": 10000.0
+          },
+          "offset": 468
+        },
+        {
+          "name": "curve1",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo curve with shared axis",
+            "min": -10.0,
+            "max": 10.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "curve2",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo curve with shared axis",
+            "min": -10.0,
+            "max": 10.0
+          },
+          "offset": 128
+        },
+        {
+          "name": "map",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Demo map with shared axis",
+            "min": 0.0,
+            "max": 100.0
+          },
+          "offset": 320
+        }
+      ],
+      "size": 552
+    },
+    {
+      "name": "CalPage2",
+      "fields": [
+        {
+          "name": "lookup_table",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "LookUpTable"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 0
+        },
+        {
+          "name": "params",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "Params"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 128
+        }
+      ],
+      "size": 680
+    },
+    {
+      "name": "Lookup",
+      "fields": [
+        {
+          "name": "input",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 0
+        },
+        {
+          "name": "output_linear",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 4
+        },
+        {
+          "name": "output_spline",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": -1e+32,
+            "max": 1e+32
+          },
+          "offset": 8
+        }
+      ],
+      "size": 12
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "min": 0.0,
+        "max": 4294967295.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65520,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "lookup",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "Lookup"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65524,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "cal_demo_1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "CalPage1"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "cal_demo_2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "CalPage2"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614720
+      }
+    }
+  ]
+}

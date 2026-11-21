@@ -1,0 +1,331 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "struct_demo",
+    "description": "created from a2lfile project struct_demo",
+    "version": {
+      "epk": "18_12_34",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [
+    {
+      "name": "event",
+      "index": 0,
+      "id": 0,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    },
+    {
+      "name": "event2",
+      "index": 0,
+      "id": 1,
+      "target_cycle_time_ns": 0,
+      "function": null,
+      "unit": null,
+      "cfa": 0
+    }
+  ],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 32,
+      "number": 0
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "struct2_t",
+      "fields": [
+        {
+          "name": "byte_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Byte field",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 2
+        },
+        {
+          "name": "word_field",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Word field",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 0
+        }
+      ],
+      "size": 4
+    },
+    {
+      "name": "struct1_t",
+      "fields": [
+        {
+          "name": "byte_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Byte field",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "word_field",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Word field",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 2
+        },
+        {
+          "name": "array_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "comment": "Array field of 256 bytes",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "struct_field",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "struct2_t"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 260
+        },
+        {
+          "name": "array_struct_field",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "struct2_t"
+            },
+            "x_dim": 8
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 264
+        }
+      ],
+      "size": 304
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Mainloop counter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 62750,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_counter",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Global measurement variable ",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 183712,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "local_struct2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct2_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct2_t"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 62744,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "local_struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct1_t"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65208,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "local_struct1_array",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        },
+        "x_dim": 8
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Array [10] of struct1_t"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 62776,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_struct2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct2_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct2_t"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 180224,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "static_struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct1_t"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 180238,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "static_struct1_array",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        },
+        "x_dim": 8
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Array [10] of struct1_t"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 180672,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "heap_struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Pointer to struct1_t on heap"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4194304,
+        "a2l_addr_ext": 3
+      }
+    }
+  ]
+}

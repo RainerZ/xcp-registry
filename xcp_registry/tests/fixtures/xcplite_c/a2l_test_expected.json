@@ -1,0 +1,1935 @@
+{
+  "application": {
+    "app_id": 0,
+    "name": "a2l_test",
+    "description": "created from a2lfile project a2l_test",
+    "version": {
+      "epk": "_EPK",
+      "epk_addr": 2147483648
+    }
+  },
+  "event_list": [],
+  "cal_seg_list": [
+    {
+      "name": "epk",
+      "index": 0,
+      "addr": 2147483648,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 4,
+      "number": 0
+    },
+    {
+      "name": "params",
+      "index": 1,
+      "addr": 2147549184,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 584,
+      "number": 1
+    },
+    {
+      "name": "params2",
+      "index": 2,
+      "addr": 2147614720,
+      "addr_ext": 0,
+      "mem_addr": 0,
+      "size": 584,
+      "number": 2
+    }
+  ],
+  "typedef_list": [
+    {
+      "name": "params_t",
+      "fields": [
+        {
+          "name": "uint8",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "uint16",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 65535.0
+          },
+          "offset": 2
+        },
+        {
+          "name": "uint32",
+          "dim_type": {
+            "value_type": "Ulong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 4294970000.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "uint_64",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 1000000000000000.0
+          },
+          "offset": 8
+        },
+        {
+          "name": "int8",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 16
+        },
+        {
+          "name": "int16",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 18
+        },
+        {
+          "name": "int32",
+          "dim_type": {
+            "value_type": "Slong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -2147480000.0,
+            "max": 2147480000.0
+          },
+          "offset": 20
+        },
+        {
+          "name": "int_64",
+          "dim_type": {
+            "value_type": "Slonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -1e+19,
+            "max": 1e+19
+          },
+          "offset": 24
+        },
+        {
+          "name": "float4",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -1000.0,
+            "max": 1000.0
+          },
+          "offset": 32
+        },
+        {
+          "name": "double8",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -1000.0,
+            "max": 1000.0
+          },
+          "offset": 40
+        },
+        {
+          "name": "curve1",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": -20.0,
+            "max": 20.0
+          },
+          "offset": 48
+        },
+        {
+          "name": "curve2",
+          "dim_type": {
+            "value_type": "Float64Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 80
+        },
+        {
+          "name": "curve2_axis",
+          "dim_type": {
+            "value_type": "Float32Ieee",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 20.0
+          },
+          "offset": 144
+        },
+        {
+          "name": "map1",
+          "dim_type": {
+            "value_type": "Sbyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Parameter typedef field",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 176
+        },
+        {
+          "name": "map2",
+          "dim_type": {
+            "value_type": "Slong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Parameter typedef field",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 240
+        },
+        {
+          "name": "map2_x_axis",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 368
+        },
+        {
+          "name": "map2_y_axis",
+          "dim_type": {
+            "value_type": "Uword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 500.0
+          },
+          "offset": 384
+        },
+        {
+          "name": "map3",
+          "dim_type": {
+            "value_type": "Ulonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Characteristic",
+            "comment": "Parameter typedef field",
+            "min": -128.0,
+            "max": 127.0
+          },
+          "offset": 392
+        },
+        {
+          "name": "map3_x_axis",
+          "dim_type": {
+            "value_type": "Slonglong",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Axis",
+            "unit": "unit",
+            "comment": "Parameter typedef field",
+            "min": 0.0,
+            "max": 1000.0
+          },
+          "offset": 520
+        }
+      ],
+      "size": 584
+    },
+    {
+      "name": "struct2_t",
+      "fields": [
+        {
+          "name": "byte_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "word_field",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 2
+        }
+      ],
+      "size": 4
+    },
+    {
+      "name": "struct1_t",
+      "fields": [
+        {
+          "name": "byte_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 0
+        },
+        {
+          "name": "word_field",
+          "dim_type": {
+            "value_type": "Sword",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": -32768.0,
+            "max": 32767.0
+          },
+          "offset": 2
+        },
+        {
+          "name": "array_field",
+          "dim_type": {
+            "value_type": "Ubyte",
+            "x_dim": 1,
+            "y_dim": 1
+          },
+          "mc_support_data": {
+            "object_type": "Measurement",
+            "min": 0.0,
+            "max": 255.0
+          },
+          "offset": 4
+        },
+        {
+          "name": "struct_field",
+          "dim_type": {
+            "value_type": {
+              "TypeDef": "struct2_t"
+            }
+          },
+          "mc_support_data": {
+            "object_type": "Unspecified"
+          },
+          "offset": 8
+        }
+      ],
+      "size": 12
+    }
+  ],
+  "instance_list": [
+    {
+      "name": "static_counter_max",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "ms",
+        "comment": "Test period in ms (default 10s)",
+        "min": 0.0,
+        "max": 10000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64648,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_uint8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_uint16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64652,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_uint32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64656,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_uint64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": 0.0,
+        "max": 1000000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64664,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_int8",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64672,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_int16",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64674,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_int32",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64676,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_float4",
+      "dim_type": {
+        "value_type": "Float32Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64680,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_double8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64688,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_curve1",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter field",
+        "min": -20.0,
+        "max": 20.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64112,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_curve2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter",
+        "min": 0.0,
+        "max": 1000.0,
+        "x_axis_ref": "static_curve2_axis"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64144,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_map1",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Global memory parameter",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64240,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_map2",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Global memory parameter",
+        "min": -128.0,
+        "max": 127.0,
+        "x_axis_ref": "static_map2_x_axis",
+        "y_axis_ref": "static_map2_y_axis"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64304,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_map3",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Global memory parameter",
+        "min": -128.0,
+        "max": 127.0,
+        "x_axis_ref": "static_map3_x_axis"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64456,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.uint8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64696,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.uint16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64698,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.uint32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64700,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.uint_64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": 0.0,
+        "max": 1000000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64704,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.int8",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64712,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.int16",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64714,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.int32",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64716,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.int_64",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -100000000000000.0,
+        "max": 100000000000000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64720,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.float4",
+      "dim_type": {
+        "value_type": "Float32Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64728,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.double8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64736,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.curve1",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": -20.0,
+        "max": 20.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64744,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.curve2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Global memory parameter struct field",
+        "min": 0.0,
+        "max": 1000.0,
+        "x_axis_ref": "static_params.curve2_axis"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64776,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.map1",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Global memory parameter struct field",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64872,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.map2",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Global memory parameter struct field",
+        "min": -128.0,
+        "max": 127.0,
+        "x_axis_ref": "static_params.map2_x_axis",
+        "y_axis_ref": "static_params.map2_y_axis"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 64936,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "static_params.map3",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Global memory parameter struct field",
+        "min": -128.0,
+        "max": 127.0,
+        "x_axis_ref": "static_params.map3_x_axis"
+      },
+      "address": {
+        "event_id": 0,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 65088,
+        "a2l_addr_ext": 2
+      }
+    },
+    {
+      "name": "params.uint8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": 0.0,
+        "max": 255.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614720
+      }
+    },
+    {
+      "name": "params.uint16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614722
+      }
+    },
+    {
+      "name": "params.uint32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614724
+      }
+    },
+    {
+      "name": "params.uint_64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": 0.0,
+        "max": 1e+19
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614728
+      }
+    },
+    {
+      "name": "params.int8",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614736
+      }
+    },
+    {
+      "name": "params.int16",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614738
+      }
+    },
+    {
+      "name": "params.int32",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614740
+      }
+    },
+    {
+      "name": "params.int_64",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -1e+19,
+        "max": 1e+19
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614744
+      }
+    },
+    {
+      "name": "params.float4",
+      "dim_type": {
+        "value_type": "Float32Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614752
+      }
+    },
+    {
+      "name": "params.double8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614760
+      }
+    },
+    {
+      "name": "params.curve1",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -20.0,
+        "max": 20.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614768
+      }
+    },
+    {
+      "name": "params.map1",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Parameter in calibration segment",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614896
+      }
+    },
+    {
+      "name": "params.curve2",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "unit": "unit",
+        "comment": "Comment",
+        "min": 0.0,
+        "max": 1000.0,
+        "x_axis_ref": "params.curve2_axis"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614800
+      }
+    },
+    {
+      "name": "params.map2",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Comment",
+        "min": -128.0,
+        "max": 127.0,
+        "x_axis_ref": "params.map2_x_axis",
+        "y_axis_ref": "params.map2_y_axis"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147614960
+      }
+    },
+    {
+      "name": "params.map3",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Comment",
+        "min": -128.0,
+        "max": 127.0,
+        "x_axis_ref": "params.map3_x_axis"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147615112
+      }
+    },
+    {
+      "name": "array",
+      "dim_type": {
+        "value_type": "Sword",
+        "x_dim": 16
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "int16_t array",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148672,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "matrix",
+      "dim_type": {
+        "value_type": "Float64Ieee",
+        "x_dim": 2,
+        "y_dim": 2
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "double matrix",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148704,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "local_array",
+      "dim_type": {
+        "value_type": "Sword",
+        "x_dim": 16
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "int16_t array",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294967232,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_matrix",
+      "dim_type": {
+        "value_type": "Float64Ieee",
+        "x_dim": 2,
+        "y_dim": 2
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "factor": 2.0,
+        "offset": -50.0,
+        "comment": "double matrix",
+        "min": 0.0,
+        "max": 10.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294967200,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "uint8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "0 \"SINE\" 1 \"SQUARE\" 2 \"TRIANGLE\" 3 \"SAWTOOTH\" 4 \"ARBITRARY\"",
+        "comment": "Enumeration type value uint8_t",
+        "min": 0.0,
+        "max": 4.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148881,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "uint16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 2.0,
+        "offset": -50.0,
+        "comment": "uint16_t value with linear conversion",
+        "min": -50.0,
+        "max": 300.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148624,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "uint32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "uint32_t",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148628,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "uint_64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "uint64_t",
+        "min": 0.0,
+        "max": 100000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148632,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "int8",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "int8_t",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148640,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "int16",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "int16_t",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148642,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "int32",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "int32_t",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148644,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "int_64",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "int64_t",
+        "min": -100000000000000.0,
+        "max": 100000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148648,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "float4",
+      "dim_type": {
+        "value_type": "Float32Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "float4",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148656,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "double8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "unit",
+        "comment": "double8",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148664,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "local_uint8",
+      "dim_type": {
+        "value_type": "Ubyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "unit": "0 \"false\" 1 \"true\"",
+        "comment": "Boolean value",
+        "min": 0.0,
+        "max": 1.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955989,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_uint16",
+      "dim_type": {
+        "value_type": "Uword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": 0.0,
+        "max": 65535.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955986,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_uint32",
+      "dim_type": {
+        "value_type": "Ulong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": 0.0,
+        "max": 4294970000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955980,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_uint64",
+      "dim_type": {
+        "value_type": "Ulonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": 0.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955968,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_int8",
+      "dim_type": {
+        "value_type": "Sbyte"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": -128.0,
+        "max": 127.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955967,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_int16",
+      "dim_type": {
+        "value_type": "Sword"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": -32768.0,
+        "max": 32767.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955964,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_int32",
+      "dim_type": {
+        "value_type": "Slong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": -2147480000.0,
+        "max": 2147480000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955960,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_int64",
+      "dim_type": {
+        "value_type": "Slonglong"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Integer value",
+        "min": -1000000000000.0,
+        "max": 1000000000000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955952,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_float4",
+      "dim_type": {
+        "value_type": "Float32Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 2.0,
+        "offset": -50.0,
+        "comment": "float4",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955948,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_double8",
+      "dim_type": {
+        "value_type": "Float64Ieee"
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "factor": 2.0,
+        "offset": -50.0,
+        "comment": "double8",
+        "min": -1000.0,
+        "max": 1000.0
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955936,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "params",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "params_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Characteristic",
+        "comment": "Parameter typedef instance in calibration segment"
+      },
+      "address": {
+        "addr_mode": "A2l",
+        "a2l_addr": 2147549184
+      }
+    },
+    {
+      "name": "local_struct2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct2_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct2_t"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955864,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct1_t"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294955848,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "local_struct1_array",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        },
+        "x_dim": 8
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Array [10] of struct1_t"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 4294967104,
+        "a2l_addr_ext": 3
+      }
+    },
+    {
+      "name": "struct2",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct2_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct2_t"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148736,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Instance of test_struct1_t"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148740,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "struct1_array",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        },
+        "x_dim": 16
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Array [16] of struct1_t"
+      },
+      "address": {
+        "event_id": 1,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 148882,
+        "a2l_addr_ext": 1
+      }
+    },
+    {
+      "name": "heap_struct1",
+      "dim_type": {
+        "value_type": {
+          "TypeDef": "struct1_t"
+        }
+      },
+      "mc_support_data": {
+        "object_type": "Measurement",
+        "comment": "Pointer to struct1_t on heap"
+      },
+      "address": {
+        "event_id": 2,
+        "addr_offset": 0,
+        "addr_mode": "A2lEvent",
+        "a2l_addr": 131072,
+        "a2l_addr_ext": 2
+      }
+    }
+  ]
+}
