@@ -238,15 +238,17 @@ mod fixtures {
         });
     }
 
-    // The registry loaded from the written A2L file is the registry loaded from the fixture
+    // The registry loaded from the written A2L file is the registry loaded from the fixture, the order of the instances may differ
     #[test]
-    #[ignore = "a CHARACTERISTIC with an event is loaded but not written, and the order of instances can change"]
+    #[ignore = "a CHARACTERISTIC with an event is loaded but not written"]
     fn fixtures_a2l_round_trip_keeps_registry() {
         for_each_fixture("fixtures_keeps_registry", |file, dir| {
             let mut reg = load_a2l(file)?;
+            reg.instance_list.sort_by_name_and_event();
             let json = write_json(&reg, &dir.join("loaded.json"))?;
             write_a2l(&mut reg, &dir.join("written.a2l"))?;
-            let from_a2l = load_a2l(&dir.join("written.a2l"))?;
+            let mut from_a2l = load_a2l(&dir.join("written.a2l"))?;
+            from_a2l.instance_list.sort_by_name_and_event();
             let json_from_a2l = write_json(&from_a2l, &dir.join("from_a2l.json"))?;
             same_text("registry changed by A2L round trip", &json, &json_from_a2l)
         });
