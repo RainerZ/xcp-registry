@@ -10,6 +10,7 @@ use super::{McIdentifier, Registry};
 
 /// Address modes for accessing measurement and calibration data
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Serialize, Deserialize)]
+#[non_exhaustive]
 pub enum McAddrMode {
     /// Calibration segment relative addressing
     Cal = 0,
@@ -350,13 +351,6 @@ impl McAddress {
     pub fn get_raw_a2l_addr(&self) -> (u8, u32) {
         assert!(self.addr_mode.is_a2l(), "Raw A2L address is only available for A2L addressing modes");
         (self.a2l_addr_ext, self.a2l_addr)
-    }
-    // Set the A2L address and address extension
-    // Internally used when updating an A2L file
-    pub fn set_raw_a2l_addr(&mut self, a2l_addr_ext: u8, a2l_addr: u32) {
-        assert!(self.addr_mode.is_a2l());
-        self.a2l_addr = a2l_addr;
-        self.a2l_addr_ext = a2l_addr_ext;
     }
 }
 

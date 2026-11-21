@@ -62,7 +62,7 @@ pub use mc_type::McValueTypeTrait;
 
 // McAddress
 mod mc_address;
-//pub use mc_address::McAddrMode;
+pub use mc_address::McAddrMode;
 pub use mc_address::McAddress;
 
 // McText
