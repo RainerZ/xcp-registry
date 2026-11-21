@@ -198,6 +198,7 @@ pub fn init() {
 
 /// Lock guard for the mutable registry singleton, returned by [`get_lock`]
 /// Dereferences to `Option<Registry>`, which is `None` when the registry is closed
+#[derive(Debug)]
 pub struct RegistryGuard(MutexGuard<'static, Option<Registry>>);
 
 impl std::ops::Deref for RegistryGuard {

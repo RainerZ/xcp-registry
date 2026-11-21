@@ -11,6 +11,10 @@ license = "MIT OR Apache-2.0"
 repository = "https://github.com/RainerZ/xcp-registry"
 categories = ["automotive", "embedded"]
 
+# docs.rs builds the documentation with all features, so feature-gated items are shown
+[package.metadata.docs.rs]
+all-features = true
+
 [lib]
 proc-macro = true
 
