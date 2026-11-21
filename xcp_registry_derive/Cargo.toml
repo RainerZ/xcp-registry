@@ -1,15 +1,15 @@
 [package]
 name = "xcp_register_type_derive"
-version.workspace = true
+version = "0.1.0"
 edition = "2024"
+rust-version = "1.90"
 authors = ["RainerZ"]
 description = "Derive macro McRegisterType: generates direct xcp_registry registration code"
 readme = "README.md"
-keywords = ["XCP", "Rust", "Vector", "ASAM", "A2L"]
+keywords = ["xcp", "a2l", "asam", "calibration", "measurement"]
 license = "MIT OR Apache-2.0"
-homepage = "https://vector.com"
-repository = "https://github.com/vectorgrp/xcp-lite"
-categories = ["MC"]
+repository = "https://github.com/RainerZ/xcp-registry"
+categories = ["automotive", "embedded"]
 
 [lib]
 proc-macro = true
