@@ -56,15 +56,21 @@ let mut registry = Registry::new();
 
 Set optional rendering modes before populating (see [Registry modes](#registry-modes)):
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let mut registry = Registry::new();
 registry.set_flatten_typedefs_mode(false); // default: false → use TYPEDEF_STRUCTURE
 registry.set_prefix_names_mode(false);     // default: false → no app-name prefix
 ```
 
 Set the XCP Ethernet transport parameters so the A2L gets an `IF_DATA XCP` section:
 
-```rust,ignore
+```rust,no_run
 use std::net::Ipv4Addr;
+use xcp_registry::Registry;
+
+let mut registry = Registry::new();
 registry.set_xcp_eth_params("UDP", Ipv4Addr::new(127, 0, 0, 1), 5555);
 ```
 
@@ -75,7 +81,10 @@ registry.set_xcp_eth_params("UDP", Ipv4Addr::new(127, 0, 0, 1), 5555);
 `Registry::application` is an `McApplication` value.  
 Set name, description, application id and version (EPK and EPK address) before writing the A2L:
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let mut registry = Registry::new();
 registry.application.set_info("my_app", "My application description", 1);
 registry.application.set_version("v1.2.3", 0x0000_0000);
 ```
@@ -89,11 +98,25 @@ Add one typedef per struct type, then add each struct field individually.
 
 ### Adding a typedef
 
-```rust,ignore
-use xcp_registry::{McSupportData, McObjectType, McValueType, McDimType};
+```rust,no_run
+use xcp_registry::Registry;
+
+#[repr(C)]
+struct InnerStruct {
+    value: u32,
+}
+
+#[repr(C)]
+struct ControlParams {
+    gain: f64,          // byte offset 0
+    lut: [u16; 8],      // byte offset 8
+    inner: InnerStruct, // byte offset 24
+}
+
+let mut registry = Registry::new();
 
 // Register type "ControlParams" with its total size in bytes
-let typedef = registry.add_typedef("ControlParams", std::mem::size_of::<ControlParams>())?;
+let typedef = registry.add_typedef("ControlParams", std::mem::size_of::<ControlParams>()).unwrap();
 ```
 
 `add_typedef` returns `Err(RegistryError::Duplicate)` when the same name already exists
@@ -107,8 +130,12 @@ Each field needs:
 - a `McSupportData` with metadata (at minimum: `McObjectType`)
 - the byte offset of the field within the struct
 
-```rust,ignore
-use xcp_registry::{McSupportData, McObjectType, McValueType, McDimType};
+```rust,no_run
+use xcp_registry::{McDimType, McObjectType, McSupportData, McValueType, Registry};
+
+let mut registry = Registry::new();
+registry.add_typedef("InnerStruct", 4).unwrap();
+registry.add_typedef("ControlParams", 32).unwrap();
 
 // Scalar f64 field "gain" at byte offset 0, calibration characteristic
 registry.add_typedef_field(
@@ -121,7 +148,7 @@ registry.add_typedef_field(
         .set_min(Some(0.0))
         .set_max(Some(100.0)),
     0,                                   // offset in bytes
-)?;
+).unwrap();
 
 // u16 array [8] field "lut" at byte offset 8
 registry.add_typedef_field(
@@ -130,7 +157,7 @@ registry.add_typedef_field(
     McDimType::new(McValueType::Uword, 8, 1),
     McSupportData::new(McObjectType::Characteristic).set_unit("rpm"),
     8,
-)?;
+).unwrap();
 
 // Nested typedef: field "inner" of type "InnerStruct" at byte offset 24
 registry.add_typedef_field(
@@ -139,7 +166,7 @@ registry.add_typedef_field(
     McDimType::new(McValueType::new_typedef("InnerStruct"), 1, 1),
     McSupportData::new(McObjectType::Characteristic),
     24,
-)?;
+).unwrap();
 ```
 
 `add_typedef_field` returns `Err(RegistryError::Duplicate)` when a field with the same name
@@ -147,13 +174,13 @@ already exists (idempotent if the layout is identical; emits a warning on ABI mi
 
 ### Full example – building a typedef manually
 
-```rust,ignore
-use xcp_registry::{Registry, McDimType, McValueType, McSupportData, McObjectType};
+```rust,no_run
+use xcp_registry::{McDimType, McObjectType, McSupportData, McValueType, Registry};
 
 let mut registry = Registry::new();
 
 // 1. Declare the type
-registry.add_typedef("PidParams", 24)?;
+registry.add_typedef("PidParams", 24).unwrap();
 
 // 2. Add fields
 registry.add_typedef_field(
@@ -161,19 +188,19 @@ registry.add_typedef_field(
     McDimType::new(McValueType::Float64Ieee, 1, 1),
     McSupportData::new(McObjectType::Characteristic).set_unit("1"),
     0,
-)?;
+).unwrap();
 registry.add_typedef_field(
     "PidParams", "ki",
     McDimType::new(McValueType::Float64Ieee, 1, 1),
     McSupportData::new(McObjectType::Characteristic).set_unit("1/s"),
     8,
-)?;
+).unwrap();
 registry.add_typedef_field(
     "PidParams", "kd",
     McDimType::new(McValueType::Float64Ieee, 1, 1),
     McSupportData::new(McObjectType::Characteristic).set_unit("s"),
     16,
-)?;
+).unwrap();
 ```
 
 ---
@@ -183,8 +210,12 @@ registry.add_typedef_field(
 An `McInstance` binds a type (possibly a typedef) to a name and an address.  
 Instances are added directly to the registry's `instance_list`.
 
-```rust,ignore
-use xcp_registry::{McDimType, McValueType, McSupportData, McObjectType, McAddress};
+```rust,no_run
+use xcp_registry::{McAddress, McDimType, McObjectType, McSupportData, McValueType, Registry};
+
+let mut registry = Registry::new();
+let event_id: u16 = 1; // id of the event which measures "speed"
+let offset_of_speed: i32 = 16; // byte offset of "speed" relative to the base address of the event
 
 // Calibration instance of typedef "PidParams" relative to calibration segment "calseg"
 registry.instance_list.add_instance(
@@ -192,7 +223,7 @@ registry.instance_list.add_instance(
     McDimType::new(McValueType::new_typedef("PidParams"), 1, 1),
     McSupportData::new(McObjectType::Characteristic),
     McAddress::new_calseg_rel("calseg", 0),  // byte offset within the calibration segment
-)?;
+).unwrap();
 
 // Scalar measurement instance of type f32, event-relative (dynamic DAQ)
 registry.instance_list.add_instance(
@@ -203,7 +234,7 @@ registry.instance_list.add_instance(
         .set_min(Some(0.0))
         .set_max(Some(400.0)),
     McAddress::new_event_dyn(0, event_id, offset_of_speed),
-)?;
+).unwrap();
 ```
 
 ### Addressing constructors
@@ -221,7 +252,12 @@ registry.instance_list.add_instance(
 Use `get_instance_mut` to obtain a mutable reference, then call the `update_*` methods
 on `mc_support_data` (which take `&mut self` and return `&mut Self` for chaining):
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let mut registry = Registry::new();
+// ... the instance "speed" is added as shown above
+
 if let Some(inst) = registry.instance_list.get_instance_mut("speed", None) {
     inst.mc_support_data
         .update_unit("m/s")
@@ -239,7 +275,12 @@ The second argument to `get_instance_mut` is an optional `event_id` filter
 
 Use `find_typedef_mut` on the typedef list, then `find_field_mut` on the typedef:
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let mut registry = Registry::new();
+// ... the typedef "PidParams" is added as shown above
+
 if let Some(field) = registry.typedef_list
     .find_typedef_mut("PidParams")
     .and_then(|td| td.find_field_mut("kp"))
@@ -260,7 +301,12 @@ nested typedefs, use `Registry::set_instance_field_support_data`.  The field is 
 by a **dot-separated path** relative to the instance's typedef — field names live in their
 typedef's namespace, not a flat global namespace.
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::{McObjectType, McSupportData, Registry};
+
+let mut registry = Registry::new();
+// ... the typedefs and the instances "pid" and "speed_sensor" are added as shown above
+
 // Instance "pid" has typedef "PidController"
 //   PidController::gains  →  typedef "GainStruct"
 //     GainStruct::kp      →  f64
@@ -273,7 +319,7 @@ registry.set_instance_field_support_data(
         .set_linear(0.001, 0.0, "1")
         .set_min(Some(0.0))
         .set_max(Some(100.0)),
-)?;
+).unwrap();
 
 // Direct field (no nesting):
 registry.set_instance_field_support_data(
@@ -281,7 +327,7 @@ registry.set_instance_field_support_data(
     "raw_value",
     McSupportData::new(McObjectType::Measurement)
         .set_unit("km/h"),
-)?;
+).unwrap();
 ```
 
 **Key behaviours:**
@@ -313,26 +359,35 @@ Two distinct setter families are available:
 
 ### Required field
 
-```rust,ignore
-McSupportData::new(McObjectType::Measurement)   // Measurement | Characteristic | Axis
+```rust,no_run
+use xcp_registry::{McObjectType, McSupportData};
+
+let support_data = McSupportData::new(McObjectType::Measurement); // Measurement | Characteristic | Axis
 ```
 
 ### Builder chain (construction time)
 
-```rust,ignore
-McSupportData::new(McObjectType::Characteristic)
+```rust,no_run
+use xcp_registry::{McObjectQualifier, McObjectType, McSupportData};
+
+let support_data = McSupportData::new(McObjectType::Characteristic)
     .set_unit("°C")                     // physical unit string
     .set_linear(0.1, -40.0, "°C")      // factor=0.1, offset=-40.0, implicit set_unit
     .set_min(Some(-40.0))               // lower display limit
     .set_max(Some(150.0))               // upper display limit
     .set_step(Some(0.1))                // calibration step width
     .set_comment("Coolant temperature")  // free-text description
-    .set_qualifier(McObjectQualifier::Volatile) // mark as volatile
+    .set_qualifier(McObjectQualifier::ReadOnly); // read-only parameter
 ```
 
 ### Mutation chain (post-registration)
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let mut registry = Registry::new();
+// ... the instance "temp" is added as shown above
+
 // Update metadata on an instance that was already added to the registry
 if let Some(inst) = registry.instance_list.get_instance_mut("temp", None) {
     inst.mc_support_data
@@ -348,39 +403,46 @@ if let Some(inst) = registry.instance_list.get_instance_mut("temp", None) {
 
 ### Object qualifier
 
-`McObjectQualifier` refines the volatility and access types of an object independently of its type:
+`McObjectQualifier` refines how an object can be accessed, independently of its type:
 
 | Variant | Meaning |
 |---|---|
-| `Unspecified` | Default – calibration objects are assumed constant |
-| `Volatile` | Continuously modified by the target (typical for measurements) |
-| `ReadOnly` | No asynchronous write possible |
-| `NoAsyncAccess` | Assumed volatile, no direct write |
+| `Default` | No qualifier |
+| `ReadOnly` | For read-only parameter objects |
+| `ReadWrite` | For writable measurement objects |
+| `NoAsyncAccess` | For objects that can not be accessed asynchronously |
 
 ### Axis references
 
 For maps/curves whose axes are separate objects:
 
-```rust,ignore
-McSupportData::new(McObjectType::Characteristic)
-    .set_x_axis_ref(Some("speed_axis".into()))
-    .set_y_axis_ref(Some("temp_axis".into()))
+```rust,no_run
+use xcp_registry::{McObjectType, McSupportData};
+
+let support_data = McSupportData::new(McObjectType::Characteristic)
+    .set_x_axis_ref(Some("speed_axis"))
+    .set_y_axis_ref(Some("temp_axis"));
 ```
 
 ---
 
 ## Writing A2L
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let registry = Registry::new();
+// ... events, typedefs and instances are added as shown above
+
 registry.write_a2l(
-    "my_app.a2l",           // output file path
+    &"my_app.a2l",          // output file path
     "/* generated */",      // title comment
     "MY_PROJECT",           // A2L PROJECT name
     "My application",       // PROJECT description
     "MY_MODULE",            // A2L MODULE name
     "1.0",                  // project number
     false,                  // check: re-read and validate after writing (requires feature a2l_reader)
-)?;
+).unwrap();
 ```
 
 The writer emits `TYPEDEF_STRUCTURE` / `INSTANCE` blocks by default.
@@ -406,14 +468,16 @@ xcp_registry = { version = "0.1", features = ["a2l_reader"] }
 ### Load an A2L file into a registry
 
 ```rust,ignore
+use xcp_registry::Registry;
+
 let mut registry = Registry::new();
 let warnings = registry.load_a2l(
-    "my_app.a2l",
+    &"my_app.a2l",
     true,    // print_warnings
     false,   // strict parsing
     true,    // run consistency check
     false,   // flatten typedefs after loading
-)?;
+).unwrap();
 println!("{} warnings", warnings);
 ```
 
@@ -423,7 +487,10 @@ an A2ML description. An A2L file with `/include "XCP_104.aml"` still requires `X
 ### Validate an A2L file (syntax + consistency check)
 
 ```rust,ignore
-let warnings = registry.check_a2l("my_app.a2l")?;
+use xcp_registry::Registry;
+
+let registry = Registry::new();
+let warnings = registry.check_a2l(&"my_app.a2l").unwrap();
 ```
 
 ---
@@ -432,18 +499,26 @@ let warnings = registry.check_a2l("my_app.a2l")?;
 
 The registry can be round-tripped through JSON (non standard, faster and less memory than A2L):
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::Registry;
+
+let registry = Registry::new();
+// ... events, typedefs and instances are added as shown above
+
 // Serialize to JSON
-registry.write_json(&"registry.json")?;
+registry.write_json(&"registry.json").unwrap();
 
 // Deserialize from JSON
 let mut registry = Registry::new();
-registry.load_json(&"registry.json")?;
+registry.load_json(&"registry.json").unwrap();
 ```
 
 `McSupportData` also has dedicated string helpers for embedding in other JSON structures:
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::{McObjectType, McSupportData};
+
+let mc_support_data = McSupportData::new(McObjectType::Measurement).set_unit("km/h");
 let s: String = mc_support_data.to_json_string();
 let m: Option<McSupportData> = McSupportData::from_json_string(&s);
 ```
@@ -467,13 +542,16 @@ preserved regardless.
 
 All mutating registry calls return `Result<_, RegistryError>`:
 
-```rust,ignore
-use xcp_registry::RegistryError;
+```rust,no_run
+use xcp_registry::{Registry, RegistryError};
 
-match registry.add_typedef("MyStruct", 16) {
-    Ok(_) => { /* newly created */ }
-    Err(RegistryError::Duplicate(_)) => { /* already exists – fine to ignore */ }
-    Err(e) => return Err(e.into()),
+fn register(registry: &mut Registry) -> Result<(), RegistryError> {
+    match registry.add_typedef("MyStruct", 16) {
+        Ok(_) => { /* newly created */ }
+        Err(RegistryError::Duplicate(_)) => { /* already exists – fine to ignore */ }
+        Err(e) => return Err(e),
+    }
+    Ok(())
 }
 ```
 
@@ -517,7 +595,9 @@ This generates code equivalent to the manual example in the [Type definitions](#
 
 Override the default classification or add metadata per field:
 
-```rust,ignore
+```rust,no_run
+use xcp_registry::McRegisterType;
+
 #[derive(McRegisterType)]
 struct ControlParams {
     #[characteristic(unit = "dB", min = 0.0, max = 100.0, comment = "Proportional gain")]
