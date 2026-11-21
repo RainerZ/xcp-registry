@@ -12,11 +12,24 @@ trait GenerateA2l {
     fn write_a2l(&self, writer: &mut A2lWriter) -> std::io::Result<()>;
 }
 
+// Error for registry content which can not be represented in A2L
+fn a2l_error(msg: String) -> std::io::Error {
+    std::io::Error::new(std::io::ErrorKind::InvalidData, format!("A2L writer: {msg}"))
+}
+
+// Limits of an object, an error for value types which have none (Unknown, Blob, TypeDef)
+fn get_limits(name: &str, mc_support_data: &McSupportData, value_type: McValueType) -> std::io::Result<(f64, f64)> {
+    match (mc_support_data.get_min(value_type), mc_support_data.get_max(value_type)) {
+        (Some(min), Some(max)) => Ok((min, max)),
+        _ => Err(a2l_error(format!("{name}: value type {value_type:?} has no limits"))),
+    }
+}
+
 // A2L types as str
 impl McValueType {
     // Basic type
-    fn get_type_str(&self) -> &'static str {
-        match self {
+    fn get_type_str(&self) -> std::io::Result<&'static str> {
+        Ok(match self {
             McValueType::Bool => "UBYTE",
             McValueType::Ubyte => "UBYTE",
             McValueType::Uword => "UWORD",
@@ -29,15 +42,14 @@ impl McValueType {
             McValueType::Float32Ieee => "FLOAT32_IEEE",
             McValueType::Float64Ieee => "FLOAT64_IEEE",
             McValueType::Blob(_) => "BLOB",
-            McValueType::TypeDef(_) => panic!("get_type_str: Instance not allowed as measurement"),
-            McValueType::Unknown => panic!("get_type_str: Unknown type"),
-        }
+            McValueType::TypeDef(_) | McValueType::Unknown => return Err(a2l_error(format!("value type {self:?} is not a basic data type"))),
+        })
     }
 
     // Get data type as str representing the A2L record_layout (all are predefined record layouts)
     // Used by A2L writer
-    fn get_record_layout_str(&self) -> &'static str {
-        match self {
+    fn get_record_layout_str(&self) -> std::io::Result<&'static str> {
+        Ok(match self {
             McValueType::Bool => "BOOL",
             McValueType::Ubyte => "U8",
             McValueType::Uword => "U16",
@@ -50,15 +62,14 @@ impl McValueType {
             McValueType::Float32Ieee => "F32",
             McValueType::Float64Ieee => "F64",
             McValueType::Blob(_) => "BLOB",
-            McValueType::TypeDef(_) => panic!("get_record_layout_str: Instance not allowed as record_layout"),
-            _ => panic!("get_record_layout_str: Unsupported data type"),
-        }
+            McValueType::TypeDef(_) | McValueType::Unknown => return Err(a2l_error(format!("value type {self:?} has no record layout"))),
+        })
     }
 }
 
 // Get the A2L object type of the calibration parameter
-fn get_characteristic_subtype_str(dim_type: &McDimType, mc_support_data: &McSupportData) -> &'static str {
-    match mc_support_data.object_type {
+fn get_characteristic_subtype_str(dim_type: &McDimType, mc_support_data: &McSupportData) -> std::io::Result<&'static str> {
+    Ok(match mc_support_data.object_type {
         McObjectType::Axis => "AXIS_PTS",
         McObjectType::Characteristic => {
             if dim_type.get_dim()[0] > 1
@@ -76,8 +87,8 @@ fn get_characteristic_subtype_str(dim_type: &McDimType, mc_support_data: &McSupp
                 "VALUE"
             }
         }
-        _ => panic!("get_characteristic_type_str: Unsupported object type {:?}", mc_support_data.object_type),
-    }
+        _ => return Err(a2l_error(format!("object type {:?} is not a calibration object", mc_support_data.object_type))),
+    })
 }
 
 //-------------------------------------------------------------------------------------------------
@@ -320,8 +331,9 @@ impl GenerateA2l for McXcpTransportLayer {
         // Ethernet
         // Example: /begin XCP_ON_UDP_IP 0x0104 5555 ADDRESS "127.0.0.1" /end XCP_ON_UDP_IP
         if protocol == "TCP" || protocol == "UDP" {
-            let port = self.port.unwrap();
-            let addr = self.addr.unwrap();
+            let (Some(port), Some(addr)) = (self.port, self.addr) else {
+                return Err(a2l_error(format!("transport layer {protocol}: address or port not set")));
+            };
             log::info!("A2L writer: transport layer: {protocol} {addr}:{port}");
             writeln!(writer, "\n\t\t/begin XCP_ON_{protocol}_IP 0x0104 {port} ADDRESS \"{addr}\" /end XCP_ON_{protocol}_IP")
         }
@@ -330,7 +342,7 @@ impl GenerateA2l for McXcpTransportLayer {
         else if protocol == "CAN" {
             // @@@@ TODO: Implement (CAN and CANFD)
             log::info!("A2L writer: transport layer: {protocol} ");
-            unimplemented!("A2L writer: transport layer: CAN not implemented yet");
+            Err(a2l_error("transport layer CAN is not supported".to_string()))
             // writeln!(
             //     writer,
             //     "\n\t\t/begin XCP_ON_CAN 0x0100 CAN_ID_MASTER 0x0301 CAN_ID_SLAVE 0x01 BAUDRATE 0x0F4240 SAMPLE_POINT 0x4B SAMPLE_RATE SINGLE BTL_CYCLES 0x08 SJW 0x02 SYNC_EDGE SINGLE /end XCP_ON_CAN"
@@ -346,7 +358,9 @@ impl GenerateA2l for McXcpTransportLayer {
                     HEADER_LEN_BYTE CHECKSUM_BYTE
                 /end XCP_ON_SxI
             */
-            let baud_rate = self.baud_rate.unwrap();
+            let Some(baud_rate) = self.baud_rate else {
+                return Err(a2l_error("transport layer SxI: baud rate not set".to_string()));
+            };
             log::info!("A2L writer: transport layer: SxI baud_rate={baud_rate}");
             writeln!(
                 writer,
@@ -510,15 +524,17 @@ impl McTypeDef {
                 if !exists {
                     let conversion_name = write_conversion(writer, ext_field_name, 0, field_dim_type, mc_support_data)?;
                     let unit = phys_unit(mc_support_data.get_unit());
-                    match mc_support_data.get_object_type() {
+                    // Field access, not get_object_type(), which panics on Unspecified
+                    match mc_support_data.object_type {
                         McObjectType::Measurement => {
-                            let type_str = value_type.get_type_str(); // UWORD, SWORD, ULONG, SLONG, FLOAT32_IEEE, FLOAT64_IEEE, ...
+                            let type_str = value_type.get_type_str()?; // UWORD, SWORD, ULONG, SLONG, FLOAT32_IEEE, FLOAT64_IEEE, ...
+                            let (min, max) = get_limits(ext_field_name, mc_support_data, value_type)?;
                             write!(
                                 writer,
                                 r#"/begin TYPEDEF_MEASUREMENT {ext_field_name} "{}" {type_str} {conversion_name} 0 0 {} {}"#, // 0 0 = resolution accuracy
                                 mc_support_data.get_comment(),
-                                mc_support_data.get_min(field_dim_type.value_type).unwrap(),
-                                mc_support_data.get_max(field_dim_type.value_type).unwrap()
+                                min,
+                                max
                             )?;
                             if !unit.is_empty() {
                                 write!(writer, r#" PHYS_UNIT "{unit}""#)?;
@@ -527,14 +543,15 @@ impl McTypeDef {
                             writeln!(writer, r#" /end TYPEDEF_MEASUREMENT"#,)?;
                         }
                         McObjectType::Characteristic => {
-                            let type_str = field_dim_type.value_type.get_record_layout_str();
-                            let sub_type_str = get_characteristic_subtype_str(field_dim_type, field.get_mc_support_data());
+                            let type_str = field_dim_type.value_type.get_record_layout_str()?;
+                            let sub_type_str = get_characteristic_subtype_str(field_dim_type, field.get_mc_support_data())?;
+                            let (min, max) = get_limits(ext_field_name, mc_support_data, value_type)?;
                             write!(
                                 writer,
                                 r#"/begin TYPEDEF_CHARACTERISTIC {ext_field_name} "{}" {sub_type_str} {type_str} 0 {conversion_name} {} {}"#,
                                 mc_support_data.get_comment(),
-                                mc_support_data.get_min(field_dim_type.value_type).unwrap(),
-                                mc_support_data.get_max(field_dim_type.value_type).unwrap()
+                                min,
+                                max
                             )?;
                             if !unit.is_empty() {
                                 write!(writer, r#" PHYS_UNIT "{unit}""#)?;
@@ -550,14 +567,15 @@ impl McTypeDef {
                             writeln!(writer, r#" /end TYPEDEF_CHARACTERISTIC"#,)?;
                         }
                         McObjectType::Axis => {
-                            let type_str = value_type.get_record_layout_str(); // + A_ prefix for AXIS_PTR record layouts
+                            let type_str = value_type.get_record_layout_str()?; // + A_ prefix for AXIS_PTR record layouts
+                            let (min, max) = get_limits(ext_field_name, mc_support_data, value_type)?;
                             write!(
                                 writer,
                                 r#"/begin TYPEDEF_AXIS {ext_field_name} "{}" NO_INPUT_QUANTITY A_{type_str} 0 {conversion_name} {} {} {}"#,
                                 mc_support_data.get_comment(),
                                 field_dim_type.get_dim()[0],
-                                mc_support_data.get_min(field_dim_type.value_type).unwrap(),
-                                mc_support_data.get_max(field_dim_type.value_type).unwrap()
+                                min,
+                                max
                             )?;
                             if !unit.is_empty() {
                                 write!(writer, r#" PHYS_UNIT "{unit}""#)?;
@@ -566,7 +584,7 @@ impl McTypeDef {
                         }
                         McObjectType::Unspecified => {
                             // A2L needs objects type specified in typedef field leafs
-                            panic!("Unspecified TYPEDEF object type, this can not be represented in A2L");
+                            return Err(a2l_error(format!("typedef {type_name} field {field_name}: unspecified object type can not be represented in A2L")));
                         }
                     }
                 }
@@ -633,7 +651,9 @@ impl McInstance {
         // With CANape specific IDL annotation
         if let McValueType::Blob(annotation) = &self.dim_type.value_type {
             let buffer_size = dim_type.get_dim()[0];
-            assert!(dim_type.get_dim()[0] > 0 && dim_type.get_dim()[1] == 1, "Blob must have x_dim > 0 and y_dim == 1");
+            if !(dim_type.get_dim()[0] > 0 && dim_type.get_dim()[1] == 1) {
+                return Err(a2l_error(format!("blob {name}: must have x_dim > 0 and y_dim == 1")));
+            }
 
             // As BLOB string (new representation)
             write!(writer, r#"/begin BLOB {name} "{comment}" 0x{addr:X} {buffer_size} ECU_ADDRESS_EXTENSION {ext} "#)?;
@@ -669,10 +689,9 @@ impl McInstance {
             let instance_name = self.get_unique_name(writer.registry);
             let instance_index = self.get_index(writer.registry);
             let mc_support_data = self.get_mc_support_data();
-            let min = mc_support_data.get_min(dim_type.value_type).unwrap();
-            let max = mc_support_data.get_max(dim_type.value_type).unwrap();
+            let (min, max) = get_limits(name.as_str(), mc_support_data, dim_type.value_type)?;
             let step = mc_support_data.get_step();
-            let type_str = self.dim_type.value_type.get_type_str(); // UWORD, SWORD, ULONG, SLONG, FLOAT32_IEEE, FLOAT64_IEEE, ...
+            let type_str = self.dim_type.value_type.get_type_str()?; // UWORD, SWORD, ULONG, SLONG, FLOAT32_IEEE, FLOAT64_IEEE, ...
             let conversion_name = write_conversion(writer, self.name.as_str(), instance_index, dim_type, mc_support_data)?;
             let x_fix_axis = dim_type.get_dim()[0] > 1 && mc_support_data.get_x_axis_conv().is_some();
             let y_fix_axis = dim_type.get_dim()[1] > 1 && mc_support_data.get_y_axis_conv().is_some();
@@ -680,7 +699,7 @@ impl McInstance {
             // In this special case, write a READ_ONLY CHARACTERISTIC MAP or CURVE, with fixed axis and an event
             if x_fix_axis || y_fix_axis {
                 log::debug!("A2L writer: MEASUREMENT {} has multiple dimensions with fix axis", instance_name);
-                let record_layout = dim_type.value_type.get_record_layout_str();
+                let record_layout = dim_type.value_type.get_record_layout_str()?;
                 let sub_type_str = if x_fix_axis && y_fix_axis { "MAP" } else { "CURVE" };
                 write!(
                     writer,
@@ -749,9 +768,8 @@ impl McInstance {
         let dim_type = &self.dim_type;
         let unit = phys_unit(mc_support_data.get_unit());
         let comment = mc_support_data.get_comment();
-        let record_layout = dim_type.value_type.get_record_layout_str();
-        let min = mc_support_data.get_min(dim_type.value_type).unwrap();
-        let max = mc_support_data.get_max(dim_type.value_type).unwrap();
+        let record_layout = dim_type.value_type.get_record_layout_str()?;
+        let (min, max) = get_limits(name.as_str(), mc_support_data, dim_type.value_type)?;
         let step = mc_support_data.get_step();
         let conversion_name = write_conversion(writer, name.as_str(), 0, dim_type, mc_support_data)?;
         write!(
@@ -801,12 +819,13 @@ impl McInstance {
         // All other value types: -> CHARACTERISTIC
         else {
             let mc_support_data = self.get_mc_support_data();
-            assert!(mc_support_data.is_calibration_object());
-            let min = mc_support_data.get_min(self.dim_type.value_type).unwrap();
-            let max = mc_support_data.get_max(self.dim_type.value_type).unwrap();
+            if !mc_support_data.is_calibration_object() {
+                return Err(a2l_error(format!("{name}: not a calibration object")));
+            }
+            let (min, max) = get_limits(name.as_str(), mc_support_data, self.dim_type.value_type)?;
             let step = mc_support_data.get_step();
-            let sub_type_str = get_characteristic_subtype_str(&self.dim_type, mc_support_data); // VAL_BLK, VALUE, MAP, CURVE
-            let record_layout = self.dim_type.value_type.get_record_layout_str();
+            let sub_type_str = get_characteristic_subtype_str(&self.dim_type, mc_support_data)?; // VAL_BLK, VALUE, MAP, CURVE
+            let record_layout = self.dim_type.value_type.get_record_layout_str()?;
 
             // Bool: Use BOOL
             if self.dim_type.value_type == McValueType::Bool {
@@ -1177,8 +1196,9 @@ ASAP2_VERSION 1 71
         for a in self.registry.instance_list.into_iter() {
             // If axis
             if a.is_axis() {
-                assert!(a.address.is_segment_relative());
-                assert!(!a.is_measurement_object());
+                if !a.address.is_segment_relative() || a.is_measurement_object() {
+                    return Err(a2l_error(format!("axis {}: must be a calibration object in a calibration segment", a.name)));
+                }
                 a.write_axis(self)?;
             }
         }
@@ -1242,7 +1262,9 @@ ASAP2_VERSION 1 71
     }
 
     pub fn write_a2l(&mut self, title_comment: &str, project_name: &str, project_description: &str, module_name: &str, project_no: &str) -> Result<(), std::io::Error> {
-        assert!(!project_name.is_empty() && !module_name.is_empty() && !project_no.is_empty());
+        if project_name.is_empty() || module_name.is_empty() || project_no.is_empty() {
+            return Err(std::io::Error::new(std::io::ErrorKind::InvalidInput, "A2L writer: project name, module name and project number must not be empty"));
+        }
         self.write_a2l_head(title_comment, project_name, project_description, module_name, project_no)?;
         self.write_a2l_modpar()?;
         self.write_a2l_if_data()?; // Always, the transport layer block only if set
