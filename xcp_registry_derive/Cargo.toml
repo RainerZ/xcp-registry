@@ -21,3 +21,16 @@ proc-macro2 = "1.0"
 
 [dev-dependencies]
 xcp_registry = { path = "../xcp_registry" }
+
+#--------------------------------------------------------------------------------------
+# Lint settings, kept in the manifest so they travel with the crate
+[lints.clippy]
+cast_possible_truncation = "warn"
+cast_possible_wrap = "warn"
+cast_sign_loss = "warn"
+cast_precision_loss = "warn"
+too_many_arguments = "allow"
+collapsible_if = "allow"
+derivable_impls = "allow"
+len_zero = "allow"
+manual_range_contains = "allow"
