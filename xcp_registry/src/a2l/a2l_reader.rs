@@ -156,11 +156,17 @@ fn get_conversion(conversion: &str, module: &a2lfile::Module) -> (Option<f64>, O
             match compu_method.conversion_type {
                 a2lfile::ConversionType::Identical => (None, None, None),
                 a2lfile::ConversionType::Linear => {
-                    let coeffs_linear = compu_method.coeffs_linear.as_ref().unwrap();
+                    let Some(coeffs_linear) = compu_method.coeffs_linear.as_ref() else {
+                        warn!("Compu method {}: COEFFS_LINEAR missing, conversion ignored", name);
+                        return (None, None, None);
+                    };
                     (Some(coeffs_linear.a), Some(coeffs_linear.b), None)
                 }
                 a2lfile::ConversionType::RatFunc => {
-                    let coeffs = compu_method.coeffs.as_ref().unwrap();
+                    let Some(coeffs) = compu_method.coeffs.as_ref() else {
+                        warn!("Compu method {}: COEFFS missing, conversion ignored", name);
+                        return (None, None, None);
+                    };
                     if coeffs.f != 0.0 && coeffs.d == 0.0 && coeffs.e == 0.0 && coeffs.a == 0.0 {
                         (Some(coeffs.b / coeffs.f), Some(coeffs.c), None)
                     } else {
@@ -205,14 +211,18 @@ fn get_event_id_from_ifdata(if_data_vec: &Vec<a2lfile::IfData>) -> Option<u16> {
             if let Some(daq_event) = xcp.daq_event {
                 // Fixed event
                 if let Some(fixed_event_list) = daq_event.fixed_event_list {
-                    assert!(!fixed_event_list.event.is_empty());
-                    return Some(fixed_event_list.event[0].item);
+                    if let Some(event) = fixed_event_list.event.first() {
+                        return Some(event.item);
+                    }
+                    warn!("IF_DATA XCP: empty FIXED_EVENT_LIST ignored");
                 }
                 // Default event, take the first event from the list as fixed event
                 if let Some(event_lists) = daq_event.variable {
                     if let Some(default_event_list) = event_lists.default_event_list {
-                        assert!(!default_event_list.event.is_empty());
-                        return Some(default_event_list.event[0].item);
+                        if let Some(event) = default_event_list.event.first() {
+                            return Some(event.item);
+                        }
+                        warn!("IF_DATA XCP: empty DEFAULT_EVENT_LIST ignored");
                     }
                 }
             }
@@ -399,7 +409,9 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
                 for e in daq.event {
                     // Process each event
                     info!("Event found in IF_DATA XCP: {} - {}", e.event_channel_name, e.event_channel_number);
-                    registry.event_list.add_event(McEvent::new(e.event_channel_name, 0, e.event_channel_number, 0)).unwrap();
+                    if let Err(e) = registry.event_list.add_event(McEvent::new(e.event_channel_name, 0, e.event_channel_number, 0)) {
+                        warn!("Failed to add event: {}", e);
+                    }
                 }
             }
         }
@@ -464,14 +476,9 @@ fn registry_load_a2lfile(registry: &mut Registry, a2l_file: &a2lfile::A2lFile) -
         let (x_dim, y_dim) = get_matrix_dim(characteristic.matrix_dim.as_ref());
         let object_type: McObjectType = McObjectType::Characteristic;
         match characteristic.characteristic_type {
-            a2lfile::CharacteristicType::Cuboid => {
-                panic!("Cuboid not supported");
-            }
-            a2lfile::CharacteristicType::Cube4 => {
-                panic!("Cube4 not supported");
-            }
-            a2lfile::CharacteristicType::Cube5 => {
-                panic!("Cube5 not supported");
+            a2lfile::CharacteristicType::Cuboid | a2lfile::CharacteristicType::Cube4 | a2lfile::CharacteristicType::Cube5 => {
+                warn!("Characteristic {} skipped, type {:?} not supported", name, characteristic.characteristic_type);
+                continue;
             }
             _ => {}
         }
