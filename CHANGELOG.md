@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html); as long as the version is 0.x, a new
 minor version may contain breaking changes.
 
-## [0.1.0] - not yet released
+## [0.1.0] - 2026-11-21
 
 First release as separate crates. Both crates were developed as part of
 [xcp-lite](https://github.com/vectorgrp/xcp-lite) and are taken from xcp-lite V3.0.11. For the

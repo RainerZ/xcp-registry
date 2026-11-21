@@ -6,6 +6,8 @@ rust-version.workspace = true
 authors.workspace = true
 description = "Measurement and Calibration registry for XCP - pure Rust, no C dependency"
 readme = "README.md"
+# The .gitignore only ignores private notes, it is not part of the package
+exclude = [".gitignore"]
 keywords.workspace = true
 license.workspace = true
 repository.workspace = true
