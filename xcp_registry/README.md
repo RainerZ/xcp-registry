@@ -430,7 +430,7 @@ let warnings = registry.check_a2l("my_app.a2l")?;
 
 ## JSON serialization
 
-The registry can be round-tripped through JSON (useful for testing or offline tooling):
+The registry can be round-tripped through JSON (non standard, faster and less memory than A2L):
 
 ```rust
 // Serialize to JSON
